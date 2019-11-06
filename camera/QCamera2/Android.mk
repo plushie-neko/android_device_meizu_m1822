@@ -84,7 +84,7 @@ LOCAL_C_INCLUDES := \
         $(call project-path-for,qcom-media)/mm-core/inc \
         $(TARGET_OUT_HEADERS)/mm-camera-lib/cp/prebuilt
 
-ifneq (,$(filter $(TRINKET),$(TARGET_BOARD_PLATFORM)))
+ifneq ($(TARGET_KERNEL_VERSION),$(filter $(TARGET_KERNEL_VERSION),3.18 4.4 4.9))
 LOCAL_C_INCLUDES += \
         system/core/libion/kernel-headers \
         system/core/libion/include
@@ -128,7 +128,7 @@ LOCAL_SHARED_LIBRARIES += android.frameworks.displayservice@1.0 libhidlbase libh
 else
 LOCAL_SHARED_LIBRARIES += libgui
 endif
-ifneq (,$(filter $(TRINKET),$(TARGET_BOARD_PLATFORM)))
+ifneq ($(TARGET_KERNEL_VERSION),$(filter $(TARGET_KERNEL_VERSION),3.18 4.4 4.9))
 LOCAL_SHARED_LIBRARIES += libion
 endif
 ifeq ($(TARGET_TS_MAKEUP),true)
