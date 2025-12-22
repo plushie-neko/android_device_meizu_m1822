@@ -9,3 +9,8 @@ allow qti_init_shell sysfs:file { write setattr };
 
 allow qti_init_shell system_data_file:file getattr;
 allow qti_init_shell self:capability kill;
+
+allow qti_init_shell vendor_radio_data_file:dir rw_dir_perms;
+allow qti_init_shell vendor_radio_data_file:dir create_dir_perms;
+allow qti_init_shell vendor_radio_data_file:file create_file_perms;
+allow qti_init_shell radio_core_data_file:dir search;
