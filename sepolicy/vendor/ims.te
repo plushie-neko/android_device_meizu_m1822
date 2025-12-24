@@ -1,1 +1,2 @@
+allow ims sysfs_subsys:file read;
 allow ims diag_device:chr_file rw_file_perms;
