@@ -1,3 +1,4 @@
 allow ims sysfs_subsys:file read;
 allow ims sysfs_subsys:file r_file_perms;
+allow ims sysfs_subsys:file r_file_perms;
 allow ims diag_device:chr_file rw_file_perms;
