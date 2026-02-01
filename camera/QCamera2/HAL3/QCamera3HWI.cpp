@@ -93,8 +93,8 @@ namespace qcamera {
 #define REGIONS_TUPLE_COUNT    5
 #define HDR_PLUS_PERF_TIME_OUT  (7000) // milliseconds
 // Set a threshold for detection of missing buffers //seconds
-#define MISSING_REQUEST_BUF_TIMEOUT 3
-#define FLUSH_TIMEOUT 3
+#define MISSING_REQUEST_BUF_TIMEOUT 1
+#define FLUSH_TIMEOUT 1
 #define METADATA_MAP_SIZE(MAP) (sizeof(MAP)/sizeof(MAP[0]))
 
 #define CAM_QCOM_FEATURE_PP_SUPERSET_HAL3   ( CAM_QCOM_FEATURE_DENOISE2D |\
@@ -423,7 +423,7 @@ QCamera3HardwareInterface::QCamera3HardwareInterface(uint32_t cameraId,
     // Getting system props of different kinds
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.raw.dump", prop, "0");
+    property_get("persist.vendor.camera.raw.dump", prop, "0");
     mEnableRawDump = atoi(prop);
     property_get("persist.camera.hal3.force.hdr", prop, "0");
     mForceHdrSnapshot = atoi(prop);
@@ -435,15 +435,15 @@ QCamera3HardwareInterface::QCamera3HardwareInterface(uint32_t cameraId,
     memset(mLdafCalib, 0, sizeof(mLdafCalib));
 
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.tnr.preview", prop, "0");
+    property_get("persist.vendor.camera.tnr.preview", prop, "0");
     m_bTnrPreview = (uint8_t)atoi(prop);
 
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.tnr.video", prop, "0");
+    property_get("persist.vendor.camera.tnr.video", prop, "0");
     m_bTnrVideo = (uint8_t)atoi(prop);
 
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.avtimer.debug", prop, "0");
+    property_get("persist.vendor.camera.avtimer.debug", prop, "0");
     m_debug_avtimer = (uint8_t)atoi(prop);
 
     //Load and read GPU library.
@@ -574,9 +574,6 @@ QCamera3HardwareInterface::~QCamera3HardwareInterface()
             //send the last unconfigure
             cam_stream_size_info_t stream_config_info;
             memset(&stream_config_info, 0, sizeof(cam_stream_size_info_t));
-            stream_config_info.buffer_info.min_buffers = MIN_INFLIGHT_REQUESTS;
-            stream_config_info.buffer_info.max_buffers =
-                    m_bIs4KVideo ? 0 : MAX_INFLIGHT_REQUESTS;
             clear_metadata_buffer(mParameters);
             ADD_SET_PARAM_ENTRY_TO_BATCH(mParameters, CAM_INTF_META_STREAM_INFO,
                     stream_config_info);
@@ -805,7 +802,7 @@ int QCamera3HardwareInterface::openCamera()
 
     // Setprop to decide the time source (whether boottime or monotonic).
     // By default, use monotonic time.
-    property_get("persist.camera.time.monotonic", value, "1");
+    property_get("persist.vendor.camera.time.monotonic", value, "1");
     mBootToMonoTimestampOffset = 0;
     if (atoi(value) == 1) {
         // if monotonic is set, then need to use time in monotonic.
@@ -1265,7 +1262,7 @@ void QCamera3HardwareInterface::addToPPFeatureMask(int stream_format,
     int property_len;
 
     /* Get feature mask from property */
-    property_len = property_get("persist.camera.hal3.feature",
+    property_len = property_get("persist.vendor.camera.hal3.feature",
             feature_mask_value, "0");
     if ((property_len > 2) && (feature_mask_value[0] == '0') &&
             (feature_mask_value[1] == 'x')) {
@@ -1556,7 +1553,7 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
     /* EIS setprop control */
     char eis_prop[PROPERTY_VALUE_MAX];
     memset(eis_prop, 0, sizeof(eis_prop));
-    property_get("persist.camera.eis.enable", eis_prop, "1");
+    property_get("persist.vendor.camera.eis.enable", eis_prop, "1");
     eis_prop_set = (uint8_t)atoi(eis_prop);
 
     m_bEisEnable = eis_prop_set && (!oisSupported && m_bEisSupported) &&
@@ -2275,7 +2272,6 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
         }
     }
 
-
     if (mAnalysisChannel) {
         cam_analysis_info_t analysisInfo;
         memset(&analysisInfo, 0, sizeof(cam_analysis_info_t));
@@ -2400,10 +2396,6 @@ int QCamera3HardwareInterface::configureStreamsPerfLocked(
                 gCamCapability[mCameraId]->color_arrangement);
         mStreamConfigInfo.num_streams++;
     }
-
-    mStreamConfigInfo.buffer_info.min_buffers = MIN_INFLIGHT_REQUESTS;
-    mStreamConfigInfo.buffer_info.max_buffers =
-            m_bIs4KVideo ? 0 : MAX_INFLIGHT_REQUESTS;
 
     /* Initialize mPendingRequestInfo and mPendingBuffersMap */
     for (pendingRequestIterator i = mPendingRequestsList.begin();
@@ -3186,7 +3178,7 @@ void QCamera3HardwareInterface::handleMetadataWithLock(
                     //Dump tuning metadata if enabled and available
                     char prop[PROPERTY_VALUE_MAX];
                     memset(prop, 0, sizeof(prop));
-                    property_get("persist.camera.dumpmetadata", prop, "0");
+                    property_get("persist.vendor.camera.dumpmetadata", prop, "0");
                     int32_t enabled = atoi(prop);
                     if (enabled && metadata->is_tuning_params_valid) {
                         dumpMetadataToFile(metadata->tuning_params,
@@ -4011,10 +4003,6 @@ int QCamera3HardwareInterface::processCaptureRequest(
             cam_stream_size_info_t stream_config_info;
             int32_t hal_version = CAM_HAL_V3;
             memset(&stream_config_info, 0, sizeof(cam_stream_size_info_t));
-            stream_config_info.buffer_info.min_buffers =
-                    MIN_INFLIGHT_REQUESTS;
-            stream_config_info.buffer_info.max_buffers =
-                    m_bIs4KVideo ? 0 : MAX_INFLIGHT_REQUESTS;
             clear_metadata_buffer(mParameters);
             ADD_SET_PARAM_ENTRY_TO_BATCH(mParameters,
                     CAM_INTF_PARM_HAL_VERSION, hal_version);
@@ -4032,10 +4020,10 @@ int QCamera3HardwareInterface::processCaptureRequest(
         /* get eis information for stream configuration */
         cam_is_type_t isTypeVideo, isTypePreview, is_type=IS_TYPE_NONE;
         char is_type_value[PROPERTY_VALUE_MAX];
-        property_get("persist.camera.is_type", is_type_value, "4");
+        property_get("persist.vendor.camera.is_type", is_type_value, "4");
         isTypeVideo = static_cast<cam_is_type_t>(atoi(is_type_value));
         // Make default value for preview IS_TYPE as IS_TYPE_EIS_2_0
-        property_get("persist.camera.is_type_preview", is_type_value, "4");
+        property_get("persist.vendor.camera.is_type_preview", is_type_value, "4");
         isTypePreview = static_cast<cam_is_type_t>(atoi(is_type_value));
         LOGD("isTypeVideo: %d isTypePreview: %d", isTypeVideo, isTypePreview);
 
@@ -4638,11 +4626,27 @@ no_error:
                 meta.find(ANDROID_COLOR_CORRECTION_ABERRATION_MODE).data.u8[0];
     }
     pendingRequest.fwkCacMode = mCacMode;
-
     PendingBuffersInRequest bufsForCurRequest;
     bufsForCurRequest.frame_number = frameNumber;
     // Mark current timestamp for the new request
-    bufsForCurRequest.timestamp = systemTime(CLOCK_MONOTONIC);
+    List<PendingBuffersInRequest>::iterator bufsForPrevRequest;
+    if ( mPendingBuffersMap.mPendingBuffersInRequest.size() > 0 ) {
+        bufsForPrevRequest = mPendingBuffersMap.mPendingBuffersInRequest.end();
+        bufsForPrevRequest --;
+        if ( systemTime(CLOCK_MONOTONIC) > bufsForPrevRequest->timestamp ) {
+           bufsForCurRequest.timestamp = systemTime(CLOCK_MONOTONIC);
+        } else {
+           bufsForCurRequest.timestamp = bufsForPrevRequest->timestamp;
+        }
+     } else {
+        bufsForCurRequest.timestamp = systemTime(CLOCK_MONOTONIC);
+    }
+
+    if (meta.exists(ANDROID_SENSOR_EXPOSURE_TIME)) {
+        int64_t sensorExpTime =
+               meta.find(ANDROID_SENSOR_EXPOSURE_TIME).data.i64[0];
+        bufsForCurRequest.timestamp += sensorExpTime;
+    }
 
     for (size_t i = 0; i < request->num_output_buffers; i++) {
         RequestedBufferInfo requestedBuf;
@@ -4979,6 +4983,7 @@ no_error:
       // Make timeout as 5 sec for request to be honored
       ts.tv_sec += 5;
     }
+      ts.tv_sec += ((bufsForCurRequest.timestamp - systemTime(CLOCK_MONOTONIC))/1000000000);
     //Block on conditional variable
     while ((mPendingLiveRequest >= mMinInFlightRequests) && !pInputBuffer &&
             (mState != ERROR) && (mState != DEINIT)) {
@@ -5590,6 +5595,7 @@ QCamera3HardwareInterface::translateFromHalMetadata(
     IF_META_AVAILABLE(cam_edge_application_t, edgeApplication,
             CAM_INTF_META_EDGE_MODE, metadata) {
         camMetadata.update(ANDROID_EDGE_MODE, &(edgeApplication->edge_mode), 1);
+        camMetadata.update(QCAMERA3_SHARPNESS_STRENGTH, &(edgeApplication->sharpness), 1);
     }
 
     IF_META_AVAILABLE(uint32_t, flashPower, CAM_INTF_META_FLASH_POWER, metadata) {
@@ -6736,7 +6742,7 @@ void QCamera3HardwareInterface::dumpMetadataToFile(tuning_params_t &meta,
                 type,
                 frameNumber);
         filePath.append(buf);
-        int file_fd = open(filePath.string(), O_RDWR | O_CREAT, 0777);
+        int file_fd = open(filePath.c_str(), O_RDWR | O_CREAT, 0777);
         if (file_fd >= 0) {
             ssize_t written_len = 0;
             meta.tuning_data_version = TUNING_DATA_VERSION;
@@ -7562,7 +7568,7 @@ int QCamera3HardwareInterface::initStaticMetadata(uint32_t cameraId)
     char eis_prop[PROPERTY_VALUE_MAX];
     bool eisSupported = false;
     memset(eis_prop, 0, sizeof(eis_prop));
-    property_get("persist.camera.eis.enable", eis_prop, "1");
+    property_get("persist.vendor.camera.eis.enable", eis_prop, "1");
     uint8_t eis_prop_set = (uint8_t)atoi(eis_prop);
     count = IS_TYPE_MAX;
     count = MIN(gCamCapability[cameraId]->supported_is_types_cnt, count);
@@ -7598,7 +7604,7 @@ int QCamera3HardwareInterface::initStaticMetadata(uint32_t cameraId)
 
     /* 0: OFF, 1: OFF+SIMPLE, 2: OFF+FULL, 3: OFF+SIMPLE+FULL */
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.facedetect", prop, "1");
+    property_get("persist.vendor.camera.facedetect", prop, "1");
     uint8_t supportedFaceDetectMode = (uint8_t)atoi(prop);
     LOGD("Support face detection mode: %d",
              supportedFaceDetectMode);
@@ -7801,7 +7807,7 @@ int QCamera3HardwareInterface::initStaticMetadata(uint32_t cameraId)
     }
     //Advertise HFR capability only if the property is set
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.hal3hfr.enable", prop, "1");
+    property_get("persist.vendor.camera.hal3hfr.enable", prop, "1");
     uint8_t hfrEnable = (uint8_t)atoi(prop);
 
     if(hfrEnable && available_hfr_configs.array()) {
@@ -8815,13 +8821,13 @@ camera_metadata_t* QCamera3HardwareInterface::translateCapabilityToMetadata(int 
     /* OIS disable */
     char ois_prop[PROPERTY_VALUE_MAX];
     memset(ois_prop, 0, sizeof(ois_prop));
-    property_get("persist.camera.ois.disable", ois_prop, "0");
+    property_get("persist.vendor.camera.ois.disable", ois_prop, "0");
     uint8_t ois_disable = (uint8_t)atoi(ois_prop);
 
     /* Force video to use OIS */
     char videoOisProp[PROPERTY_VALUE_MAX];
     memset(videoOisProp, 0, sizeof(videoOisProp));
-    property_get("persist.camera.ois.video", videoOisProp, "1");
+    property_get("persist.vendor.camera.ois.video", videoOisProp, "1");
     uint8_t forceVideoOis = (uint8_t)atoi(videoOisProp);
     uint8_t controlIntent = 0;
     uint8_t focusMode;
@@ -9191,7 +9197,7 @@ camera_metadata_t* QCamera3HardwareInterface::translateCapabilityToMetadata(int 
     /* CDS default */
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.CDS", prop, "Auto");
+    property_get("persist.vendor.camera.CDS", prop, "Off");
     cam_cds_mode_type_t cds_mode = CAM_CDS_MODE_AUTO;
     cds_mode = lookupProp(CDS_MAP, METADATA_MAP_SIZE(CDS_MAP), prop);
     if (CAM_CDS_MODE_MAX == cds_mode) {
@@ -10838,7 +10844,7 @@ cam_denoise_process_type_t QCamera3HardwareInterface::getWaveletDenoiseProcessPl
 {
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.denoise.process.plates", prop, "0");
+    property_get("persist.vendor.denoise.process.plates", prop, "0");
     int processPlate = atoi(prop);
     switch(processPlate) {
     case 0:
@@ -10868,7 +10874,7 @@ cam_denoise_process_type_t QCamera3HardwareInterface::getTemporalDenoiseProcessP
 {
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.tnr.process.plates", prop, "0");
+    property_get("persist.vendor.tnr.process.plates", prop, "0");
     int processPlate = atoi(prop);
     switch(processPlate) {
     case 0:
@@ -11129,7 +11135,7 @@ uint8_t QCamera3HardwareInterface::getMobicatMask()
 int32_t QCamera3HardwareInterface::setMobicat()
 {
     char value [PROPERTY_VALUE_MAX];
-    property_get("persist.camera.mobicat", value, "0");
+    property_get("persist.vendor.camera.mobicat", value, "0");
     int32_t ret = NO_ERROR;
     uint8_t enableMobi = (uint8_t)atoi(value);
 
@@ -11167,16 +11173,16 @@ void QCamera3HardwareInterface::getLogLevel()
     char prop[PROPERTY_VALUE_MAX];
     uint32_t globalLogLevel = 0;
 
-    property_get("persist.camera.hal.debug", prop, "0");
+    property_get("persist.vendor.camera.hal.debug", prop, "0");
     int val = atoi(prop);
     if (0 <= val) {
         gCamHal3LogLevel = (uint32_t)val;
     }
 
-    property_get("persist.camera.kpi.debug", prop, "1");
+    property_get("persist.vendor.camera.kpi.debug", prop, "1");
     gKpiDebugLevel = atoi(prop);
 
-    property_get("persist.camera.global.debug", prop, "0");
+    property_get("persist.vendor.camera.global.debug", prop, "0");
     val = atoi(prop);
     if (0 <= val) {
         globalLogLevel = (uint32_t)val;

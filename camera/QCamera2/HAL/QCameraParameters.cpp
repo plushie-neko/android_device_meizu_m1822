@@ -895,7 +895,7 @@ const QCameraParameters::QCameraMap<int>
 static inline bool isOEMFeat1PropEnabled()
 {
     char value[PROPERTY_VALUE_MAX];
-    property_get("persist.camera.imglib.oemfeat1", value, "0");
+    property_get("persist.vendor.camera.imglib.oemfeat1", value, "0");
     return atoi(value) > 0 ? true : false;
 }
 
@@ -1006,13 +1006,13 @@ QCameraParameters::QCameraParameters()
 {
     char value[PROPERTY_VALUE_MAX];
     // TODO: may move to parameter instead of sysprop
-    property_get("persist.debug.sf.showfps", value, "0");
+    property_get("persist.vendor.debug.sf.showfps", value, "0");
     m_bDebugFps = atoi(value) > 0 ? true : false;
 
     // For thermal mode, it should be set as system property
     // because system property applies to all applications, while
     // parameters only apply to specific app.
-    property_get("persist.camera.thermal.mode", value, "fps");
+    property_get("persist.vendor.camera.thermal.mode", value, "fps");
     if (!strcmp(value, "frameskip")) {
         m_ThermalMode = QCAMERA_THERMAL_ADJUST_FRAMESKIP;
     } else {
@@ -1024,7 +1024,7 @@ QCameraParameters::QCameraParameters()
     memset(value, 0, sizeof(value));
     // As per Power/Quality evaluation, LTM is enabled by default in SeeMore/StillMore usecase
     // to improve the quality as there is no much impact to power
-    property_get("persist.camera.ltmforseemore", value, "1");
+    property_get("persist.vendor.camera.ltmforseemore", value, "1");
     m_bLtmForSeeMoreEnabled = atoi(value);
 
     memset(&m_LiveSnapshotSize, 0, sizeof(m_LiveSnapshotSize));
@@ -1526,7 +1526,7 @@ int32_t QCameraParameters::setPreviewSize(const QCameraParameters& params)
     if (m_relCamSyncInfo.mode == CAM_MODE_SECONDARY) {
         char prop[PROPERTY_VALUE_MAX];
         // set prop to configure aux preview size
-        property_get("persist.camera.aux.preview.size", prop, "0");
+        property_get("persist.vendor.camera.aux.preview.size", prop, "0");
         parse_pair(prop, &width, &height, 'x', NULL);
         bool foundMatch = false;
         for (size_t i = 0; i < m_pCapability->preview_sizes_tbl_cnt; ++i) {
@@ -1610,7 +1610,7 @@ int32_t QCameraParameters::setPictureSize(const QCameraParameters& params)
     if (m_relCamSyncInfo.mode == CAM_MODE_SECONDARY) {
         char prop[PROPERTY_VALUE_MAX];
         // set prop to configure aux preview size
-        property_get("persist.camera.aux.picture.size", prop, "0");
+        property_get("persist.vendor.camera.aux.picture.size", prop, "0");
         parse_pair(prop, &width, &height, 'x', NULL);
         bool foundMatch = false;
         for (size_t i = 0; i < m_pCapability->picture_sizes_tbl_cnt; ++i) {
@@ -1801,7 +1801,7 @@ void QCameraParameters::getLiveSnapshotSize(cam_dimension_t &dim)
 int32_t QCameraParameters::setLiveSnapshotSize(const QCameraParameters& params)
 {
     char value[PROPERTY_VALUE_MAX];
-    property_get("persist.camera.opt.livepic", value, "1");
+    property_get("persist.vendor.camera.opt.livepic", value, "1");
     bool useOptimal = atoi(value) > 0 ? true : false;
     bool vHdrOn;
     int32_t liveSnapWidth = 0, liveSnapHeight = 0;
@@ -1912,7 +1912,7 @@ int32_t QCameraParameters::setLiveSnapshotSize(const QCameraParameters& params)
     //The setprop resolution format should be WxH.
     //e.g: adb shell setprop persist.camera.liveshot.size 1280x720
     memset(value, 0, PROPERTY_VALUE_MAX);
-    property_get("persist.camera.liveshot.size", value, "");
+    property_get("persist.vendor.camera.liveshot.size", value, "");
     if (strlen(value) > 0) {
         char *saveptr = NULL;
         char *token = strtok_r(value, "x", &saveptr);
@@ -1980,7 +1980,7 @@ int32_t QCameraParameters::setPreviewFormat(const QCameraParameters& params)
             char prop[PROPERTY_VALUE_MAX];
             int pFormat;
             memset(prop, 0, sizeof(prop));
-            property_get("persist.camera.preview.ubwc", prop, "1");
+            property_get("persist.vendor.camera.preview.ubwc", prop, "1");
 
             pFormat = atoi(prop);
             if (pFormat == 1) {
@@ -2083,7 +2083,7 @@ int32_t QCameraParameters::setBurstLEDOnPeriod(const QCameraParameters& params)
         // read from sys prop
         char prop[PROPERTY_VALUE_MAX];
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.led.on.period", prop, "0");
+        property_get("persist.vendor.camera.led.on.period", prop, "0");
         nBurstLEDOnPeriod = atoi(prop);
         if (nBurstLEDOnPeriod <= 0) {
             nBurstLEDOnPeriod = 300;
@@ -2125,7 +2125,7 @@ int32_t QCameraParameters::setRetroActiveBurstNum(
         // read from sys prop
         char prop[PROPERTY_VALUE_MAX];
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.retro.number", prop, "0");
+        property_get("persist.vendor.camera.retro.number", prop, "0");
         nBurstNum = atoi(prop);
         if (nBurstNum < 0) {
             nBurstNum = 0;
@@ -2483,7 +2483,7 @@ int32_t QCameraParameters::setEffect(const QCameraParameters& params)
 
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.effect", prop, "none");
+    property_get("persist.vendor.camera.effect", prop, "none");
 
     if (strcmp(prop, "none")) {
         if ((prev_str == NULL) ||
@@ -2940,7 +2940,7 @@ int32_t QCameraParameters::setStatsDebugMask()
     uint32_t mask = 0;
     char value[PROPERTY_VALUE_MAX];
 
-    property_get("persist.camera.stats.debug.mask", value, "0");
+    property_get("persist.vendor.camera.stats.debug.mask", value, "0");
     mask = (uint32_t)atoi(value);
 
     LOGH("ctrl mask :%d", mask);
@@ -2969,7 +2969,7 @@ int32_t QCameraParameters::setPAAF()
     uint32_t paaf = 0;
     char value[PROPERTY_VALUE_MAX];
 
-    property_get("persist.camera.stats.af.paaf", value, "1");
+    property_get("persist.vendor.camera.stats.af.paaf", value, "1");
     paaf = (uint32_t)atoi(value);
 
     LOGH("PAAF is: %s", paaf ? "ON": "OFF");
@@ -3140,7 +3140,7 @@ int32_t  QCameraParameters::setISOValue(const QCameraParameters& params)
     if(getManualCaptureMode()) {
         char iso_val[PROPERTY_VALUE_MAX];
 
-        property_get("persist.camera.iso", iso_val, "");
+        property_get("persist.vendor.camera.iso", iso_val, "");
         if (strlen(iso_val) > 0) {
             if (prev_str == NULL ||
                     strcmp(iso_val, prev_str) != 0) {
@@ -3174,7 +3174,7 @@ int32_t  QCameraParameters::setContinuousISO(const char *isoValue)
     int32_t continous_iso = 0;
 
     // Check if continuous ISO is set through setproperty
-    property_get("persist.camera.continuous.iso", iso, "");
+    property_get("persist.vendor.camera.continuous.iso", iso, "");
     if (strlen(iso) > 0) {
         continous_iso = atoi(iso);
     } else {
@@ -3223,7 +3223,7 @@ int32_t  QCameraParameters::setExposureTime(const QCameraParameters& params)
     } else if(getManualCaptureMode()) {
         char expTime[PROPERTY_VALUE_MAX];
 
-        property_get("persist.camera.exposure.time", expTime, "");
+        property_get("persist.vendor.camera.exposure.time", expTime, "");
         if (strlen(expTime) > 0) {
             if (prev_str == NULL ||
                     strcmp(expTime, prev_str) != 0) {
@@ -3390,7 +3390,7 @@ int32_t QCameraParameters::setAutoHDR(const QCameraParameters& params)
     char prop[PROPERTY_VALUE_MAX];
 
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.auto.hdr.enable", prop, VALUE_DISABLE);
+    property_get("persist.vendor.camera.auto.hdr.enable", prop, VALUE_DISABLE);
     if (str != NULL) {
        if (prev_str == NULL ||
            strcmp(str, prev_str) != 0) {
@@ -3701,7 +3701,7 @@ int32_t QCameraParameters::setAEBracket(const QCameraParameters& params)
     } else {
         char prop[PROPERTY_VALUE_MAX];
         memset(prop, 0, sizeof(prop));
-        property_get("persist.capture.burst.exposures", prop, "");
+        property_get("persist.vendor.capture.burst.exposures", prop, "");
         if (strlen(prop) > 0) {
             set(KEY_QC_CAPTURE_BURST_EXPOSURE, prop);
         } else {
@@ -4430,7 +4430,7 @@ int32_t QCameraParameters::setNoDisplayMode(const QCameraParameters& params)
         }
     } else {
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.no-display", prop, "0");
+        property_get("persist.vendor.camera.no-display", prop, "0");
         m_bNoDisplayMode = atoi(prop);
     }
     LOGH("Param m_bNoDisplayMode = %d", m_bNoDisplayMode);
@@ -4613,7 +4613,7 @@ int32_t QCameraParameters::setTemporalDenoise(const QCameraParameters& params)
 
     char value[PROPERTY_VALUE_MAX];
     memset(value, 0, sizeof(value));
-    property_get("persist.camera.tnr_cds", value, "0");
+    property_get("persist.vendor.camera.tnr_cds", value, "0");
     uint8_t tnr_cds = (uint8_t)atoi(value);
 
     if (m_bRecordingHint_new == true) {
@@ -4651,7 +4651,7 @@ int32_t QCameraParameters::setTemporalDenoise(const QCameraParameters& params)
             && ((video_str == NULL)
             || (strcmp(video_str, VALUE_ON)))) {
         memset(video_value, 0, sizeof(video_value));
-        property_get("persist.camera.tnr.video", video_value, VALUE_OFF);
+        property_get("persist.vendor.camera.tnr.video", video_value, VALUE_OFF);
         if (!strcmp(video_value, VALUE_ON)) {
             m_bTNRVideoOn = true;
         } else {
@@ -4660,7 +4660,7 @@ int32_t QCameraParameters::setTemporalDenoise(const QCameraParameters& params)
         updateParamEntry(KEY_QC_VIDEO_TNR_MODE, video_value);
 
         memset(preview_value, 0, sizeof(preview_value));
-        property_get("persist.camera.tnr.preview", preview_value, VALUE_OFF);
+        property_get("persist.vendor.camera.tnr.preview", preview_value, VALUE_OFF);
         if (!strcmp(preview_value, VALUE_ON)) {
             m_bTNRPreviewOn = true;
         } else {
@@ -4670,7 +4670,7 @@ int32_t QCameraParameters::setTemporalDenoise(const QCameraParameters& params)
     } else if ((m_bRecordingHint_new != true)
             && ((str == NULL) || (strcmp(str, VALUE_ON)))) {
         memset(preview_value, 0, sizeof(preview_value));
-        property_get("persist.camera.tnr.preview", preview_value, VALUE_OFF);
+        property_get("persist.vendor.camera.tnr.preview", preview_value, VALUE_OFF);
         if (!strcmp(preview_value, VALUE_ON)) {
             m_bTNRPreviewOn = true;
         } else {
@@ -4680,7 +4680,7 @@ int32_t QCameraParameters::setTemporalDenoise(const QCameraParameters& params)
     }
 
     memset(value, 0, sizeof(value));
-    property_get("persist.camera.tnr.snapshot", value, VALUE_OFF);
+    property_get("persist.vendor.camera.tnr.snapshot", value, VALUE_OFF);
     if (!strcmp(value, VALUE_ON)) {
         m_bTNRSnapshotOn = true;
         LOGD("TNR enabled for SNAPSHOT stream");
@@ -4856,7 +4856,7 @@ int32_t QCameraParameters::setRdiMode(const QCameraParameters& params)
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
 
-    property_get("persist.camera.rdi.mode", prop, VALUE_DISABLE);
+    property_get("persist.vendor.camera.rdi.mode", prop, VALUE_DISABLE);
     if ((str != NULL) && (prev_str == NULL || strcmp(str, prev_str) != 0)) {
         LOGD("RDI mode set to %s", str);
         setRdiMode(str);
@@ -4887,7 +4887,7 @@ int32_t QCameraParameters::setSecureMode(const QCameraParameters& params)
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
 
-    property_get("persist.camera.secure.mode", prop, VALUE_DISABLE);
+    property_get("persist.vendor.camera.secure.mode", prop, VALUE_DISABLE);
     if ((str != NULL) && (prev_str == NULL || strcmp(str, prev_str) != 0)) {
         LOGD("Secure mode set to KEY: %s", str);
         setSecureMode(str);
@@ -4920,7 +4920,7 @@ int32_t QCameraParameters::setZslAttributes(const QCameraParameters& params)
         set(KEY_QC_ZSL_BURST_INTERVAL, str);
     } else {
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.zsl.interval", prop, "1");
+        property_get("persist.vendor.camera.zsl.interval", prop, "1");
         set(KEY_QC_ZSL_BURST_INTERVAL, prop);
         LOGH("burst interval: %s", prop);
     }
@@ -4930,7 +4930,7 @@ int32_t QCameraParameters::setZslAttributes(const QCameraParameters& params)
         set(KEY_QC_ZSL_BURST_LOOKBACK, str);
     } else {
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.zsl.backlookcnt", prop, "2");
+        property_get("persist.vendor.camera.zsl.backlookcnt", prop, "2");
         uint32_t look_back_cnt = atoi(prop);
         if (m_bFrameSyncEnabled) {
             look_back_cnt += EXTRA_FRAME_SYNC_BUFFERS;
@@ -4944,7 +4944,7 @@ int32_t QCameraParameters::setZslAttributes(const QCameraParameters& params)
         set(KEY_QC_ZSL_QUEUE_DEPTH, str);
     } else {
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.zsl.queuedepth", prop, "2");
+        property_get("persist.vendor.camera.zsl.queuedepth", prop, "2");
         uint32_t queue_depth = atoi(prop);
         if (m_bFrameSyncEnabled) {
             queue_depth += EXTRA_FRAME_SYNC_BUFFERS;
@@ -5038,7 +5038,7 @@ int32_t QCameraParameters::setSnapshotFDReq(const QCameraParameters& params)
         set(KEY_QC_SNAPSHOT_FD_DATA, str);
     }else{
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.snapshot.fd", prop, "0");
+        property_get("persist.vendor.camera.snapshot.fd", prop, "0");
         set(KEY_QC_SNAPSHOT_FD_DATA, prop);
     }
     return NO_ERROR;
@@ -5059,7 +5059,7 @@ int32_t QCameraParameters::setSnapshotFDReq(const QCameraParameters& params)
 int32_t QCameraParameters::setMobicat(const QCameraParameters& )
 {
     char value [PROPERTY_VALUE_MAX];
-    property_get("persist.camera.mobicat", value, "0");
+    property_get("persist.vendor.camera.mobicat", value, "0");
     int32_t ret = NO_ERROR;
     uint8_t enableMobi = (uint8_t)atoi(value);
 
@@ -5761,11 +5761,13 @@ int32_t QCameraParameters::initDefaultParameters()
     set(KEY_SUPPORTED_SCENE_MODES, sceneModeValues);
     setSceneMode(SCENE_MODE_AUTO);
 
+#if 0
     // Set CDS Mode
     String8 cdsModeValues = createValuesStringFromMap(
             CDS_MODES_MAP,
             PARAM_MAP_SIZE(CDS_MODES_MAP));
     set(KEY_QC_SUPPORTED_CDS_MODES, cdsModeValues);
+#endif
 
     // Set video CDS Mode
     String8 videoCdsModeValues = createValuesStringFromMap(
@@ -5872,7 +5874,7 @@ int32_t QCameraParameters::initDefaultParameters()
     // Set Bracketing/HDR
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.capture.burst.exposures", prop, "");
+    property_get("persist.vendor.capture.burst.exposures", prop, "");
     if (strlen(prop) > 0) {
         set(KEY_QC_CAPTURE_BURST_EXPOSURE, prop);
     }
@@ -6064,7 +6066,7 @@ int32_t QCameraParameters::initDefaultParameters()
     // Set HDR output scaling
     char value[PROPERTY_VALUE_MAX];
 
-    property_get("persist.camera.hdr.outcrop", value, VALUE_DISABLE);
+    property_get("persist.vendor.camera.hdr.outcrop", value, VALUE_DISABLE);
     if (strncmp(VALUE_ENABLE, value, sizeof(VALUE_ENABLE))) {
       m_bHDROutputCropEnabled = false;
     } else {
@@ -6093,7 +6095,7 @@ int32_t QCameraParameters::initDefaultParameters()
     // If yes, force the camera to be in zsl mode
     // and force zsl mode to be enabled in dual camera mode.
     memset(value, 0x0, PROPERTY_VALUE_MAX);
-    property_get("persist.camera.zsl.mode", value, "0");
+    property_get("persist.vendor.camera.zsl.mode", value, "0");
     int32_t zsl_mode = atoi(value);
     if((zsl_mode == 1) ||
             (m_bZslMode == true) ||
@@ -6586,7 +6588,7 @@ int32_t QCameraParameters::setPreviewFpsRange(int min_fps,
     char value[PROPERTY_VALUE_MAX];
     int fixedFpsValue;
     /*This property get value should be the fps that user needs*/
-    property_get("persist.debug.set.fixedfps", value, "0");
+    property_get("persist.vendor.debug.set.fixedfps", value, "0");
     fixedFpsValue = atoi(value);
 
     LOGD("E minFps = %d, maxFps = %d , vid minFps = %d, vid maxFps = %d",
@@ -6599,8 +6601,9 @@ int32_t QCameraParameters::setPreviewFpsRange(int min_fps,
         }
     }
     snprintf(str, sizeof(str), "%d,%d", min_fps, max_fps);
-    LOGH("Setting preview fps range %s", str);
-    updateParamEntry(KEY_PREVIEW_FPS_RANGE, str);
+    LOGH("Actual preview fps range %s", str);
+    updateParamEntry(KEY_PREVIEW_FPS_RANGE, "7000,30000");
+    LOGH("Setting the preview fps range 7000,30000");
     cam_fps_range_t fps_range;
     memset(&fps_range, 0x00, sizeof(cam_fps_range_t));
     fps_range.min_fps = (float)min_fps / 1000.0f;
@@ -7028,7 +7031,7 @@ int32_t QCameraParameters::setSensorSnapshotHDR(const char *snapshotHDR)
 
             char zz_prop[PROPERTY_VALUE_MAX];
             memset(zz_prop, 0, sizeof(zz_prop));
-            property_get("persist.camera.zzhdr.enable", zz_prop, "0");
+            property_get("persist.vendor.camera.zzhdr.enable", zz_prop, "0");
             uint8_t zzhdr_enable = (uint8_t)atoi(zz_prop);
 
             if (zzhdr_enable && (value != CAM_SENSOR_HDR_OFF)) {
@@ -7069,7 +7072,7 @@ int32_t QCameraParameters::setVideoHDR(const char *videoHDR)
 
             char zz_prop[PROPERTY_VALUE_MAX];
             memset(zz_prop, 0, sizeof(zz_prop));
-            property_get("persist.camera.zzhdr.video", zz_prop, "0");
+            property_get("persist.vendor.camera.zzhdr.video", zz_prop, "0");
             uint8_t use_zzhdr_video = (uint8_t)atoi(zz_prop);
 
             if (use_zzhdr_video) {
@@ -7962,7 +7965,7 @@ int32_t QCameraParameters::setTintlessValue(const QCameraParameters& params)
     char prop[PROPERTY_VALUE_MAX];
 
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.tintless", prop, VALUE_ENABLE);
+    property_get("persist.vendor.camera.tintless", prop, VALUE_ENABLE);
     if (str != NULL) {
         if (prev_str == NULL ||
             strcmp(str, prev_str) != 0) {
@@ -8072,7 +8075,7 @@ int32_t QCameraParameters::setCDSMode(const QCameraParameters& params)
         } else {
             char video_prop[PROPERTY_VALUE_MAX];
             memset(video_prop, 0, sizeof(video_prop));
-            property_get("persist.camera.video.CDS", video_prop, CDS_MODE_ON);
+            property_get("persist.vendor.camera.video.CDS", video_prop, CDS_MODE_OFF);
             int32_t cds_mode = lookupAttr(CDS_MODES_MAP, PARAM_MAP_SIZE(CDS_MODES_MAP),
                     video_prop);
             if (cds_mode != NAME_NOT_FOUND) {
@@ -8112,7 +8115,7 @@ int32_t QCameraParameters::setCDSMode(const QCameraParameters& params)
         } else {
             char prop[PROPERTY_VALUE_MAX];
             memset(prop, 0, sizeof(prop));
-            property_get("persist.camera.CDS", prop, CDS_MODE_ON);
+            property_get("persist.vendor.camera.CDS", prop, CDS_MODE_OFF);
             int32_t cds_mode = lookupAttr(CDS_MODES_MAP, PARAM_MAP_SIZE(CDS_MODES_MAP),
                     prop);
             if (cds_mode != NAME_NOT_FOUND) {
@@ -8163,7 +8166,7 @@ int32_t QCameraParameters::setInitialExposureIndex(const QCameraParameters& para
     } else {
         char prop[PROPERTY_VALUE_MAX];
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.initial.exp.val", prop, "");
+        property_get("persist.vendor.camera.initial.exp.val", prop, "");
         if ((strlen(prop) > 0) &&
                 ( (prev_str == NULL) || (strcmp(prop, prev_str) != 0))) {
             value = atoi(prop);
@@ -8223,7 +8226,7 @@ int32_t QCameraParameters::setInstantCapture(const QCameraParameters& params)
     } else {
         char prop[PROPERTY_VALUE_MAX];
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.instant.capture", prop, KEY_QC_INSTANT_CAPTURE_DISABLE);
+        property_get("persist.vendor.camera.instant.capture", prop, KEY_QC_INSTANT_CAPTURE_DISABLE);
         if ((prev_str == NULL) || (strcmp(prop, prev_str) != 0)) {
             value = lookupAttr(INSTANT_CAPTURE_MODES_MAP,
                     PARAM_MAP_SIZE(INSTANT_CAPTURE_MODES_MAP), prop);
@@ -8257,7 +8260,7 @@ int32_t QCameraParameters::setInstantCapture(const QCameraParameters& params)
     if (m_bInstantCapture) {
         char prop[PROPERTY_VALUE_MAX];
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.ae.capture.bound", prop, "7");
+        property_get("persist.vendor.camera.ae.capture.bound", prop, "7");
         int32_t frame_bound = atoi(prop);
         if (frame_bound >= 0) {
             mAecFrameBound = (uint8_t)frame_bound;
@@ -8311,7 +8314,7 @@ int32_t QCameraParameters::setInstantAEC(const QCameraParameters& params)
         } else {
             char prop[PROPERTY_VALUE_MAX];
             memset(prop, 0, sizeof(prop));
-            property_get("persist.camera.instant.aec", prop, KEY_QC_INSTANT_AEC_DISABLE);
+            property_get("persist.vendor.camera.instant.aec", prop, KEY_QC_INSTANT_AEC_DISABLE);
             if ((prev_str == NULL) || (strcmp(prop, prev_str) != 0)) {
                 value = lookupAttr(INSTANT_AEC_MODES_MAP,
                         PARAM_MAP_SIZE(INSTANT_AEC_MODES_MAP), prop);
@@ -8343,7 +8346,7 @@ int32_t QCameraParameters::setInstantAEC(const QCameraParameters& params)
     if (m_bInstantAEC) {
         char prop[PROPERTY_VALUE_MAX];
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.ae.instant.bound", prop, "7");
+        property_get("persist.vendor.camera.ae.instant.bound", prop, "7");
         int32_t aec_frame_skip_cnt = atoi(prop);
         if (aec_frame_skip_cnt >= 0) {
             mAecSkipDisplayFrameBound = (uint8_t)aec_frame_skip_cnt;
@@ -8415,7 +8418,7 @@ int32_t QCameraParameters::updateOisValue(bool oisValue)
     // Check for OIS disable
     char ois_prop[PROPERTY_VALUE_MAX];
     memset(ois_prop, 0, sizeof(ois_prop));
-    property_get("persist.camera.ois.disable", ois_prop, "0");
+    property_get("persist.vendor.camera.ois.disable", ois_prop, "0");
     uint8_t ois_disable = (uint8_t)atoi(ois_prop);
 
     //Enable OIS if it is camera mode or Camcoder 4K mode
@@ -8747,7 +8750,7 @@ int QCameraParameters::getAutoFlickerMode()
       Currently setting it to default    */
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.set.afd", prop, "3");
+    property_get("persist.vendor.camera.set.afd", prop, "3");
     return atoi(prop);
 }
 
@@ -8986,7 +8989,7 @@ bool QCameraParameters::isSupportedSensorHdrSize(const QCameraParameters& params
 {
     char value[PROPERTY_VALUE_MAX];
     memset(value, 0, sizeof(value));
-    property_get("persist.camera.zzhdr.enable", value, "0");
+    property_get("persist.vendor.camera.zzhdr.enable", value, "0");
     uint8_t zzhdr_enable = (uint8_t)atoi(value);
 
     if (zzhdr_enable) {
@@ -9743,7 +9746,7 @@ int32_t QCameraParameters::setCacheVideoBuffers(const char *cacheVideoBufStr)
                 PARAM_MAP_SIZE(ENABLE_DISABLE_MODES_MAP), cacheVideoBufStr);
         char prop[PROPERTY_VALUE_MAX];
         memset(prop, 0, sizeof(prop));
-        property_get("persist.camera.mem.usecache", prop, "");
+        property_get("persist.vendor.camera.mem.usecache", prop, "");
         if (strlen(prop) > 0) {
             cacheVideoBuf = atoi(prop);
         }
@@ -9908,9 +9911,9 @@ cam_denoise_process_type_t
     memset(prop, 0, sizeof(prop));
     cam_denoise_process_type_t processPlate = CAM_WAVELET_DENOISE_CBCR_ONLY;
     if (CAM_INTF_PARM_WAVELET_DENOISE == type) {
-        property_get("persist.denoise.process.plates", prop, "");
+        property_get("persist.vendor.denoise.process.plates", prop, "");
     } else if (CAM_INTF_PARM_TEMPORAL_DENOISE == type) {
-        property_get("persist.tnr.process.plates", prop, "");
+        property_get("persist.vendor.tnr.process.plates", prop, "");
     } else {
         LOGW("Type not supported");
         prop[0] = '\0';
@@ -10121,7 +10124,7 @@ int32_t QCameraParameters::getStreamSubFormat(cam_stream_type_t streamType,
           int rawSubFormat;
           memset(raw_sub_format, 0, sizeof(raw_sub_format));
           /*Default value is CAM_FORMAT_SUBTYPE_PDAF_STATS*/
-          property_get("persist.camera.raw.subformat", raw_sub_format, "1");
+          property_get("persist.vendor.camera.raw.subformat", raw_sub_format, "1");
           rawSubFormat = atoi(raw_sub_format);
           sub_format = (cam_sub_format_type_t)rawSubFormat;
           LOGH("Subformat for raw stream = %d", sub_format);
@@ -10208,7 +10211,7 @@ int32_t QCameraParameters::getStreamFormat(cam_stream_type_t streamType,
             char prop[PROPERTY_VALUE_MAX];
             int snapshotFormat;
             memset(prop, 0, sizeof(prop));
-            property_get("persist.camera.snap.format", prop, "0");
+            property_get("persist.vendor.camera.snap.format", prop, "0");
             snapshotFormat = atoi(prop);
             if(snapshotFormat == 1) {
                 format = CAM_FORMAT_YUV_422_NV61;
@@ -10222,7 +10225,7 @@ int32_t QCameraParameters::getStreamFormat(cam_stream_type_t streamType,
             char prop[PROPERTY_VALUE_MAX];
             int pFormat;
             memset(prop, 0, sizeof(prop));
-            property_get("persist.camera.video.ubwc", prop, "1");
+            property_get("persist.vendor.camera.video.ubwc", prop, "1");
             pFormat = atoi(prop);
             if (pFormat == 1) {
                 format = CAM_FORMAT_YUV_420_NV12_UBWC;
@@ -10248,7 +10251,7 @@ int32_t QCameraParameters::getStreamFormat(cam_stream_type_t streamType,
             int rawFormat;
             memset(raw_format, 0, sizeof(raw_format));
             /*Default value is CAM_FORMAT_BAYER_QCOM_RAW_10BPP_GBRG*/
-            property_get("persist.camera.raw.format", raw_format, "17");
+            property_get("persist.vendor.camera.raw.format", raw_format, "17");
             rawFormat = atoi(raw_format);
             format = (cam_format_t)rawFormat;
             LOGH("Raw stream format %d bundled with snapshot",
@@ -11025,7 +11028,7 @@ uint32_t QCameraParameters::getJpegExifRotation() {
 bool QCameraParameters::useJpegExifRotation() {
     char exifRotation[PROPERTY_VALUE_MAX];
 
-    property_get("persist.camera.exif.rotation", exifRotation, "off");
+    property_get("persist.vendor.camera.exif.rotation", exifRotation, "off");
 
     if (!strcmp(exifRotation, "on")) {
         return true;
@@ -12106,7 +12109,7 @@ void QCameraParameters::setDcrf()
 
     // In dual-cam mode, get sysprop and set it to on by default
     if(m_relCamSyncInfo.sync_control == CAM_SYNC_RELATED_SENSORS_ON) {
-        property_get("persist.camera.dcrf.enable", prop, "1");
+        property_get("persist.vendor.camera.dcrf.enable", prop, "1");
         m_bDcrfEnabled = atoi(prop);
     }
 }
@@ -12892,7 +12895,7 @@ int32_t QCameraParameters::setEztune()
 {
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.eztune.enable", prop, "0");
+    property_get("persist.vendor.camera.eztune.enable", prop, "0");
     m_bEztuneEnabled = atoi(prop);
     return NO_ERROR;
 }
@@ -12967,26 +12970,26 @@ int32_t QCameraParameters::setISType()
     if (m_bDISEnabled && eisSupported) {
         char value[PROPERTY_VALUE_MAX];
         // Make default value for Video IS_TYPE as IS_TYPE_EIS_2_0
-        property_get("persist.camera.is_type", value, "4");
+        property_get("persist.vendor.camera.is_type", value, "4");
         mIsTypeVideo = static_cast<cam_is_type_t>(atoi(value));
         if ( (mIsTypeVideo == IS_TYPE_EIS_3_0) && (eis3Supported == FALSE) ) {
             LOGW("EIS_3.0 is not supported and so setting EIS_2.0");
             mIsTypeVideo = IS_TYPE_EIS_2_0;
         }
         // Make default value for preview IS_TYPE as IS_TYPE_EIS_2_0
-        property_get("persist.camera.is_type_preview", value, "4");
+        property_get("persist.vendor.camera.is_type_preview", value, "4");
         mIsTypePreview = static_cast<cam_is_type_t>(atoi(value));
     } else if (m_bDISEnabled) {
         char value[PROPERTY_VALUE_MAX];
         // Make default value for Video IS_TYPE as IS_TYPE_DIS
-        property_get("persist.camera.is_type", value, "2");
+        property_get("persist.vendor.camera.is_type", value, "2");
         mIsTypeVideo = static_cast<cam_is_type_t>(atoi(value));
         if (mIsTypeVideo >= IS_TYPE_DIS) {
             LOGW("EIS is not supported and so setting DIS");
             mIsTypeVideo = IS_TYPE_DIS;
         }
         // Make default value for preview IS_TYPE as IS_TYPE_DIS
-        property_get("persist.camera.is_type_preview", value, "2");
+        property_get("persist.vendor.camera.is_type_preview", value, "2");
         mIsTypePreview = static_cast<cam_is_type_t>(atoi(value));
         if (mIsTypePreview >= IS_TYPE_DIS) {
             LOGW("EIS is not supported and so setting DIS");
@@ -13215,7 +13218,7 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
             m_pCapability->min_scanline,
             stream_config_info.batch_size);
 
-    property_get("persist.camera.raw_yuv", value, "0");
+    property_get("persist.vendor.camera.raw_yuv", value, "0");
     raw_yuv = atoi(value) > 0 ? true : false;
 
     if (isZSLMode() && getRecordingHintValue() != true) {
@@ -13826,7 +13829,7 @@ bool QCameraParameters::isPreviewSeeMoreRequired()
 
    getVideoSize(&dim.width, &dim.height);
    memset(prop, 0, sizeof(prop));
-   property_get("persist.camera.preview.seemore", prop, "0");
+   property_get("persist.vendor.camera.preview.seemore", prop, "0");
    int enable = atoi(prop);
 
    // Enable SeeMore for preview stream if :
@@ -13897,9 +13900,9 @@ void QCameraParameters::setOfflineRAW(bool raw_value)
         return;
     }
 
-    property_get("persist.camera.raw_yuv", value, "0");
+    property_get("persist.vendor.camera.raw_yuv", value, "0");
     raw_yuv = atoi(value) > 0 ? true : false;
-    property_get("persist.camera.offlineraw", value, "0");
+    property_get("persist.vendor.camera.offlineraw", value, "0");
     offlineRaw = atoi(value) > 0 ? true : false;
     if ((raw_yuv || isRdiMode()) && offlineRaw) {
         mOfflineRAW = true;
@@ -14139,7 +14142,7 @@ bool QCameraParameters::isMultiPassReprocessing()
         return TRUE;
     }
 
-    property_get("persist.camera.multi_pass", value, "0");
+    property_get("persist.vendor.camera.multi_pass", value, "0");
     multpass = atoi(value);
 
     return (multpass == 0)? FALSE : TRUE;
@@ -14211,7 +14214,7 @@ bool QCameraParameters::isUBWCEnabled()
     //Disable UBWC if Eztune is enabled
     // Eztune works on CPP output and cannot understand UBWC buffer.
     memset(value, 0, sizeof(value));
-    property_get("persist.camera.eztune.enable", value, "0");
+    property_get("persist.vendor.camera.eztune.enable", value, "0");
     prop_value = atoi(value);
     if (prop_value) {
         return FALSE;
@@ -14241,7 +14244,7 @@ bool QCameraParameters::isPostProcScaling()
         return FALSE;
     }
 
-    property_get("persist.camera.pp_scaling", value, "0");
+    property_get("persist.vendor.camera.pp_scaling", value, "0");
     cpp_scaling = atoi(value) > 0 ? TRUE : FALSE;
 
     LOGH("Post proc scaling enabled : %d",
@@ -14268,7 +14271,7 @@ bool QCameraParameters::isLLNoiseEnabled()
         return FALSE;
     }
 
-    property_get("persist.camera.llnoise", value, "0");
+    property_get("persist.vendor.camera.llnoise", value, "0");
     llnoise = atoi(value) > 0 ? TRUE : FALSE;
 
     LOGH("Low light noise enabled : %d",
@@ -14292,7 +14295,7 @@ void QCameraParameters::setBufBatchCount(int8_t buf_cnt)
     char value[PROPERTY_VALUE_MAX];
     int8_t count = 0;
 
-    property_get("persist.camera.batchcount", value, "0");
+    property_get("persist.vendor.camera.batchcount", value, "0");
     count = atoi(value);
 
     if (!(count != 0 || buf_cnt > CAMERA_MIN_BATCH_COUNT)) {
@@ -14349,7 +14352,7 @@ void QCameraParameters::setVideoBatchSize()
     }
 
     //Batch size "6" is the recommended and gives optimal power saving.
-    property_get("persist.camera.video.batchsize", value, "0");
+    property_get("persist.vendor.camera.video.batchsize", value, "0");
     mVideoBatchSize = atoi(value);
 
     if (mVideoBatchSize > CAMERA_MAX_CONSUMER_BATCH_BUFFER_SIZE) {
@@ -14640,7 +14643,7 @@ uint8_t QCameraParameters::getLongshotStages()
 
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.longshot.stages", prop, "0");
+    property_get("persist.vendor.camera.longshot.stages", prop, "0");
     uint8_t propStages = atoi(prop);
     if (propStages > 0 && propStages <= CAMERA_DEFAULT_LONGSHOT_STAGES) {
         numStages = propStages;
@@ -14698,7 +14701,7 @@ void QCameraParameters::setLowLightCapture()
 {
     char prop[PROPERTY_VALUE_MAX];
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.llc", prop, "0");
+    property_get("persist.vendor.camera.llc", prop, "0");
     m_LLCaptureEnabled = (atoi(prop) > 0) ? TRUE : FALSE;
 
     if (!m_LLCaptureEnabled) {
@@ -14761,7 +14764,7 @@ uint8_t QCameraParameters::fdModeInVideo()
     char value[PROPERTY_VALUE_MAX];
     uint8_t fdvideo = 0;
 
-    property_get("persist.camera.fdvideo", value, "0");
+    property_get("persist.vendor.camera.fdvideo", value, "0");
     fdvideo = (atoi(value) > 0) ? atoi(value) : 0;
 
     LOGD("FD mode in Video : %d", fdvideo);
@@ -14786,7 +14789,7 @@ int32_t QCameraParameters::setManualCaptureMode(QCameraManualCaptureModes mode)
     char value[PROPERTY_VALUE_MAX];
     int8_t count = 0;
 
-    property_get("persist.camera.manual.capture", value, "0");
+    property_get("persist.vendor.camera.manual.capture", value, "0");
     count = atoi(value);
 
     if (count) {
@@ -14885,7 +14888,7 @@ int32_t QCameraParameters::setLedCalibration(
         char value[PROPERTY_VALUE_MAX];
 
         memset(value, 0, sizeof(value));
-        property_get("persist.camera.led_calib_mode", value, "0");
+        property_get("persist.vendor.camera.led_calib_mode", value, "0");
         if (strlen(value) > 0) {
             if (prev_str == NULL || strcmp(value, prev_str) != 0) {
                 return setLedCalibration(value);
@@ -15173,7 +15176,7 @@ int32_t QCameraParameters::updateDtVc(int32_t *dt, int32_t *vc)
     int vc_val = 0;
 
     /* Setting Dt from setprop or capability */
-    property_get("persist.camera.dt", prop, "0");
+    property_get("persist.vendor.camera.dt", prop, "0");
     dt_val = atoi(prop);
     if (dt_val == 0) {
         dt_val = m_pCapability->dt[0];
@@ -15181,7 +15184,7 @@ int32_t QCameraParameters::updateDtVc(int32_t *dt, int32_t *vc)
     *dt = dt_val;
 
     /*Setting vc from setprop or capability */
-    property_get("persist.camera.vc", prop, "-1");
+    property_get("persist.vendor.camera.vc", prop, "-1");
     vc_val = atoi(prop);
     if (vc_val== -1) {
         vc_val = m_pCapability->vc[0];
@@ -15209,7 +15212,7 @@ bool QCameraParameters::isLinkPreviewForLiveShot()
    memset(prop, 0, sizeof(prop));
    // 0. Thumbnail is generated from main image  (or)
    // 1. Thumbnail is generated from Preview stream
-   property_get("persist.camera.linkpreview", prop, "0");
+   property_get("persist.vendor.camera.linkpreview", prop, "0");
    bool enable = atoi(prop) > 0 ? TRUE : FALSE;
 
    LOGD("Link preview for thumbnail %d", enable);

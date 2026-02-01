@@ -1683,7 +1683,7 @@ void sort_camera_info(int num_cam)
 
     // Signifies whether YUV AUX camera has to be exposed as physical camera
     memset(prop, 0, sizeof(prop));
-    property_get("persist.camera.aux.yuv", prop, "0");
+    property_get("persist.vendor.camera.aux.yuv", prop, "0");
     is_yuv_aux_cam_exposed = atoi(prop);
     LOGI("YUV Aux camera exposed %d",is_yuv_aux_cam_exposed);
 

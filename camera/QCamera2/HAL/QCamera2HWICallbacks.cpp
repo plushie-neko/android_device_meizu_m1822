@@ -155,7 +155,7 @@ void QCamera2HardwareInterface::zsl_channel_cb(mm_camera_super_buf_t *recvd_fram
     }
 
     // DUMP RAW if available
-    property_get("persist.camera.zsl_raw", value, "0");
+    property_get("persist.vendor.camera.zsl_raw", value, "0");
     dump_raw = atoi(value) > 0 ? true : false;
     if (dump_raw) {
         for (uint32_t i = 0; i < recvd_frame->num_bufs; i++) {
@@ -278,7 +278,7 @@ void QCamera2HardwareInterface::zsl_channel_cb(mm_camera_super_buf_t *recvd_fram
         }
     }
 
-    property_get("persist.camera.dumpmetadata", value, "0");
+    property_get("persist.vendor.camera.dumpmetadata", value, "0");
     int32_t enabled = atoi(value);
     if (enabled) {
         mm_camera_buf_def_t *pMetaFrame = NULL;
@@ -298,7 +298,7 @@ void QCamera2HardwareInterface::zsl_channel_cb(mm_camera_super_buf_t *recvd_fram
         }
     }
 
-    property_get("persist.camera.zsl_matching", value, "0");
+    property_get("persist.vendor.camera.zsl_matching", value, "0");
     log_matching = atoi(value) > 0 ? true : false;
     if (log_matching) {
         LOGH("ZSL super buffer contains:");
@@ -477,7 +477,7 @@ void QCamera2HardwareInterface::capture_channel_cb_routine(mm_camera_super_buf_t
         }
     }
 
-    property_get("persist.camera.dumpmetadata", value, "0");
+    property_get("persist.vendor.camera.dumpmetadata", value, "0");
     int32_t enabled = atoi(value);
     if (enabled) {
         mm_camera_buf_def_t *pMetaFrame = NULL;
@@ -1685,7 +1685,7 @@ void QCamera2HardwareInterface::snapshot_channel_cb_routine(mm_camera_super_buf_
         return;
     }
 
-    property_get("persist.camera.dumpmetadata", value, "0");
+    property_get("persist.vendor.camera.dumpmetadata", value, "0");
     int32_t enabled = atoi(value);
     if (enabled) {
         if (pChannel == NULL ||
@@ -1821,7 +1821,7 @@ void QCamera2HardwareInterface::raw_channel_cb_routine(mm_camera_super_buf_t *su
         return;
     }
 
-    property_get("persist.camera.dumpmetadata", value, "0");
+    property_get("persist.vendor.camera.dumpmetadata", value, "0");
     int32_t enabled = atoi(value);
     if (enabled) {
         mm_camera_buf_def_t *pMetaFrame = NULL;
@@ -1907,9 +1907,9 @@ void QCamera2HardwareInterface::preview_raw_stream_cb_routine(mm_camera_super_bu
     mm_camera_buf_def_t *raw_frame = super_frame->bufs[0];
 
     if (raw_frame != NULL) {
-        property_get("persist.camera.preview_raw", value, "0");
+        property_get("persist.vendor.camera.preview_raw", value, "0");
         dump_preview_raw = atoi(value) > 0 ? true : false;
-        property_get("persist.camera.video_raw", value, "0");
+        property_get("persist.vendor.camera.video_raw", value, "0");
         dump_video_raw = atoi(value) > 0 ? true : false;
         if (dump_preview_raw || (pme->mParameters.getRecordingHintValue()
                 && dump_video_raw)) {
@@ -1956,7 +1956,7 @@ void QCamera2HardwareInterface::snapshot_raw_stream_cb_routine(mm_camera_super_b
         return;
     }
 
-    property_get("persist.camera.snapshot_raw", value, "0");
+    property_get("persist.vendor.camera.snapshot_raw", value, "0");
     dump_raw = atoi(value) > 0 ? true : false;
 
     for (uint32_t i = 0; i < super_frame->num_bufs; i++) {
@@ -2631,7 +2631,7 @@ void QCamera2HardwareInterface::dumpJpegToFile(const void *data,
         size_t size, uint32_t index)
 {
     char value[PROPERTY_VALUE_MAX];
-    property_get("persist.camera.dumpimg", value, "0");
+    property_get("persist.vendor.camera.dumpimg", value, "0");
     uint32_t enabled = (uint32_t) atoi(value);
     uint32_t frm_num = 0;
     uint32_t skip_mode = 0;
@@ -2694,7 +2694,7 @@ void QCamera2HardwareInterface::dumpMetadataToFile(QCameraStream *stream,
     char value[PROPERTY_VALUE_MAX];
     uint32_t frm_num = 0;
     metadata_buffer_t *metadata = (metadata_buffer_t *)frame->buffer;
-    property_get("persist.camera.dumpmetadata", value, "0");
+    property_get("persist.vendor.camera.dumpmetadata", value, "0");
     uint32_t enabled = (uint32_t) atoi(value);
     if (stream == NULL) {
         LOGH("No op");
@@ -2792,7 +2792,7 @@ void QCamera2HardwareInterface::dumpFrameToFile(QCameraStream *stream,
         mm_camera_buf_def_t *frame, uint32_t dump_type, const char *misc)
 {
     char value[PROPERTY_VALUE_MAX];
-    property_get("persist.camera.dumpimg", value, "0");
+    property_get("persist.vendor.camera.dumpimg", value, "0");
     uint32_t enabled = (uint32_t) atoi(value);
     uint32_t frm_num = 0;
     uint32_t skip_mode = 0;
