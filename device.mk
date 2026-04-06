@@ -1,4 +1,4 @@
-#
+	#
 # Copyright (C) 2017-2019 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -342,6 +342,10 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     init.veth_ipa_config.sh \
     ueventd.qcom.rc
+
+# RemovePackages
+PRODUCT_PACKAGES += \
+    RemovePackages
 
 # RIL
 PRODUCT_PACKAGES += \
