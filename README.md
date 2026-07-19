@@ -2,22 +2,24 @@
 
 ## Spec Sheet
 
-| Feature                 | Specification                     |
-| :---------------------- | :-------------------------------- |
-| CPU                     | Octa-core 2.0 GHz Cortex-A53      |
-| Chipset                 | Qualcomm MSM8953 Snapdragon 625   |
-| GPU                     | Adreno 506                        |
-| Memory                  | 3/4 GB                            |
-| Shipped Android Version | 8.1.0                             |
-| Storage                 | 16/32/64 GB                       |
-| MicroSD                 | Up to 128 GB                      |
-| Battery                 | 4000 mAh (non-removable)          |
-| Dimensions              | 154.6 x 75.2 x 8.35 mm            |
-| Display                 | 1920x1080 pixels, 5.5 (~401 PPI)  |
-| Rear Camera             | 12 MP + 5 MP, Quad LED flash      |
-| Front Camera            | 16 MP                             |
-| Release Date            | August 2017                       |
+| Feature                 | Specification                                                         |
+| :---------------------- | :-------------------------------------------------------------------- |
+| Chipset                 | Qualcomm SDM632 Snapdragon 632 (14 nm)                                |
+| CPU                     | Octa-core (4x1.8 GHz Kryo 250 Gold & 4x1.8 GHz Kryo 250 Silver)       |
+| GPU                     | Adreno 506                                                            |
+| Memory                  | 4 GB RAM                                                              |
+| Shipped Android Version | 8.0.0 (Oreo), Flyme 7.3                                               |
+| Storage                 | 64 GB eMMC 5.1                                                        |
+| Card slot               | No                                                                    |
+| Battery                 | Li-Ion 3600 mAh (non-removable), 24W wired charging                   |
+| Dimensions              | 153.6 x 75.5 x 7.9 mm (6.05 x 2.97 x 0.31 in)                         |
+| Weight                  | 168 g (5.93 oz)                                                       |
+| Display                 | IPS LCD, 6.0 inches, 1080 x 2160 pixels, 18:9 ratio (~402 ppi density) |
+| Rear Camera             | 12 MP, f/1.9, 1/2.55", 1.4µm, dual pixel PDAF + Auxiliary lens        |
+| Front Camera            | 8 MP, f/2.0                                                           |
+| Sensors                 | Fingerprint (rear-mounted), accelerometer, gyro, proximity, compass   |
+| Release Date            | November 2018                                                         |
 
 ## Device Picture
 
-![Meizu Note 8](https://static.onlinetrade.ru/img/items/b/smartfon_meizu_m6_note_16gb_black_743603_1.jpg "Meizu Note 8")
+![Meizu Note 8](https://fdn2.gsmarena.com/vv/pics/meizu/meizu-note-8-1.jpg "Meizu Note 8")
