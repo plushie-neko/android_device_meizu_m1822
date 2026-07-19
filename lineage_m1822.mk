@@ -18,17 +18,17 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from m1721 device
-$(call inherit-product, device/meizu/m1721/device.mk)
+# Inherit from m1822 device
+$(call inherit-product, device/meizu/m1822/device.mk)
 
 # Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := m1721
-PRODUCT_NAME := lineage_m1721
+PRODUCT_DEVICE := m1822
+PRODUCT_NAME := lineage_m1822
 PRODUCT_BRAND := Meizu
-PRODUCT_MODEL := M6 Note
+PRODUCT_MODEL := Note 8
 PRODUCT_MANUFACTURER := Meizu
 TARGET_VENDOR := Meizu
 BOARD_VENDOR := Meizu
@@ -36,7 +36,7 @@ BOARD_VENDOR := Meizu
 PRODUCT_GMS_CLIENTID_BASE := android-meizu
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="meizu_M6Note-user 7.1.2 N2G47H m1721.Flyme_6.0.1528193190 release-keys"
+    PRIVATE_BUILD_DESC="meizu_M1822_CN-user 8.1.0 OPM1.171019.026 1587639120 release-keys"
 
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
-BUILD_FINGERPRINT := "Meizu/meizu_M6Note/M6Note:7.1.2/N2G47H/m1721.Flyme_6.0.1528193190:user/release-keys"
+BUILD_FINGERPRINT := "Meizu/meizu_M1822_CN/M1822:8.1.0/OPM1.171019.026/1587639120:user/release-keys"

@@ -12,7 +12,7 @@ fi
 set -e
 
 # Required!
-DEVICE=m1721
+DEVICE=m1822
 VENDOR=meizu
 
 # Load extract_utils and do some sanity checks

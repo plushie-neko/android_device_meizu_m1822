@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.light@2.0-service.meizu_m1721"
+#define LOG_TAG "android.hardware.light@2.0-service.meizu_m1822"
 
 #include <hidl/HidlTransportSupport.h>
 

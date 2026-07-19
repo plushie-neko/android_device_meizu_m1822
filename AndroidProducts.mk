@@ -14,9 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_m1721.mk
+    $(LOCAL_DIR)/lineage_m1822.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_m1721-user \
-    lineage_m1721-userdebug \
-    lineage_m1721-eng
+    lineage_m1822-user \
+    lineage_m1822-userdebug \
+    lineage_m1822-eng

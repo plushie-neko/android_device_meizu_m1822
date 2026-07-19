@@ -14,8 +14,8 @@
 # limitations under the License.
 #
 
-$(call inherit-product, vendor/meizu/m1721/m1721-vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_n.mk)
+$(call inherit-product, vendor/meizu/m1822/m1822-vendor.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o.mk)
 
 TARGET_BOARD_PLATFORM := msm8953
 TARGET_BOARD_SUFFIX := _64
@@ -190,7 +190,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.meizu_m1721
+    android.hardware.biometrics.fingerprint@2.1-service.meizu_m1822
 
 # Fwk-detect
 PRODUCT_PACKAGES += \
@@ -267,11 +267,11 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.meizu_m1721
+    android.hardware.light@2.0-service.meizu_m1822
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service.meizu_m1721
+    vendor.lineage.livedisplay@2.0-service.meizu_m1822
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -380,7 +380,7 @@ PRODUCT_PACKAGES += \
 
 # Touch features
 PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.meizu_m1721
+    vendor.lineage.touch@1.0-service.meizu_m1822
 
 # Trust HAL
 PRODUCT_PACKAGES += \
@@ -426,4 +426,4 @@ PRODUCT_COPY_FILES += \
 
 # Custom OTA
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    lineage.updater.uri=https://raw.githubusercontent.com/meizucustoms/OTAUpdates/master/m1721.json
+    lineage.updater.uri=https://raw.githubusercontent.com/meizucustoms/OTAUpdates/master/m1822.json
