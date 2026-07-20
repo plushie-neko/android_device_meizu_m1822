@@ -151,3 +151,6 @@ ro.zram.periodic_wb_delay_hours=24
 
 # Zygote
 zygote.critical_window.minute=10
+
+# Navbar
+qemu.hw.mainkeys=0
