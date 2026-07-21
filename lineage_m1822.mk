@@ -35,6 +35,9 @@ BOARD_VENDOR := Meizu
 
 PRODUCT_GMS_CLIENTID_BASE := android-meizu
 
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.crypto.state=unencrypted
+
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="meizu_M1822_CN-user 8.1.0 OPM1.171019.026 1587639120 release-keys"
 
