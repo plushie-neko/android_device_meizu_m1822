@@ -51,7 +51,7 @@ TARGET_KERNEL_LLVM_BINUTILS := true
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_serial_dm,0x78af000 loop.max_part=16 androidboot.usbconfigfs=true
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-BOARD_KERNEL_PAGESIZE :=  2048
+BOARD_KERNEL_PAGESIZE :=  4096
 BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_KERNEL_SOURCE := kernel/meizu/m1822
@@ -59,9 +59,6 @@ TARGET_KERNEL_VERSION := 4.9
 
 # AVB
 BOARD_AVB_ENABLE := true
-
-# Disable verity and descriptor checking
-BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --set_hashtree_disabled_flag
 
 # AVB keys for non-A/B recovery
 BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
