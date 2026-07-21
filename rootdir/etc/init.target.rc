@@ -184,9 +184,6 @@ on charger
 on boot
     chown system system /sys/kernel/hbtp/display_pwr
 
-    # Load WLAN driver
-    insmod /vendor/lib/modules/pronto_wlan.ko
-
     # Battery life saver
     chown system system /sys/class/power_supply/battery/charging_enabled
     chmod 0666 /sys/class/power_supply/battery/charging_enabled
