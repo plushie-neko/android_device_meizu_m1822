@@ -1885,7 +1885,6 @@ vendor/lib64/libdpmqmihal.so|41eb89e66ba065c43a5eb79cd3c72cef0ee167aa
 
 # DRM - from LA.UM.9.6.2.r1-04200-89xx.0
 vendor/bin/qseecomd|12fde638ad4528c06fe336342862fd0ffc033dd0
-vendor/lib/libQSEEComAPI.so|961b8c99bf5d2a53b607cebf399fbdafb48c9bc6
 vendor/lib64/libdrmfs.so|1654e650448a464b9de765c9ce80ba5a29e8b9c1
 vendor/lib64/libdrmtime.so|b3f024dae4aaa62c4fc33965847d1627387c6b56
 vendor/lib64/libGPreqcancel.so|d851bcc3e1b982d8403dc86921c5dd9274f71dc5
@@ -1894,7 +1893,6 @@ vendor/lib64/libcpion.so|602ffa6e92be0f2a19c8de782e1601135c7dd2a8
 vendor/lib64/libhdcpsrm.so|8822f0408bdcc11dfc661321bfd3c253f0306e0c
 vendor/lib64/liboemcrypto.so|cff69ca64f9015e17cdcc2c45c992d262d864013
 vendor/lib64/libqisl.so|e9c402aed643ee094daaf495f1a3a1f29542d602
-vendor/lib64/libQSEEComAPI.so|17cf281138050f87e29b2b71e63d131249b10f6f
 vendor/lib64/librpmb.so|a5ee7dfbbae868a253d7413c866800ea1146d7c8
 vendor/lib64/libSecureUILib.so|e9dd8017f40691925c59a074705be7cf11130780
 vendor/lib64/libsecureui.so|eef8db680df8e9b47d4725433cd0d3886cc8aa25
@@ -1940,8 +1938,6 @@ system_ext/lib64/libfm-hci.so|0cfbf3d84724428721973cc7ad22f5d1e1368591
 vendor/lib64/vendor.qti.hardware.fm@1.0.so|f7494923e84b136a44f02699082a7e0a380f94e9
 vendor/lib64/hw/vendor.qti.hardware.fm@1.0-impl.so|66c50040a46dfa7fcefda85ddd009bff2b76f6b8
 
-# Gatekeeper - from LA.UM.9.6.2.r1-04200-89xx.0
-vendor/lib64/hw/gatekeeper.msm8953.so|391b9ded894fb581fab3f5c742236b11e2e61a7b
 
 # GPS - from LA.UM.9.6.2.r1-04200-89xx.0
 vendor/bin/hw/android.hardware.gnss@2.1-service-qti|d458a2aadc1d00df4696d6793e550f4a9422a2c9
@@ -2079,8 +2075,6 @@ vendor/firmware/a530_pm4.fw|b1cf625b5552b99839687f479c124ac5daca2ca2
 # IRQ Balance - from LA.UM.9.6.2.r1-04200-89xx.0
 vendor/bin/msm_irqbalance|e5706bc0acab394b53fafdc1d7f342f69c6f5649
 
-# Keystore - from LA.UM.9.6.2.r1-04200-89xx.0
-vendor/lib64/hw/keystore.msm8953.so|0a68ac29004f72237f48008cea188dd98d6c6560
 
 # Listen - from LA.UM.9.6.2.r1-04200-89xx.0
 vendor/lib/libadpcmdec.so|7a38d6b28b27cf663681ad077614a03164418f91
@@ -2404,3 +2398,17 @@ vendor/lib64/vendor.qti.hardware.tui_comm@1.0.so|16baab27397ad493e845515c20ac0c0
 
 # Wi-Fi - from LA.UM.9.6.3.r1-06200-89xx.0
 vendor/bin/wcnss_service|4bf3962fa1444caca2d3497e71ae4cd2ba306aa1
+
+# Gatekeeper and Keymaster
+vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti|15089bcd370a18ed6c498b1c8b7675b33ec3d2f9
+vendor/bin/hw/android.hardware.keymaster@3.0-service-qti|50c0325fe38b2dd2133b1fd2e436d5d74970a14a
+vendor/lib/hw/android.hardware.gatekeeper@1.0-impl-qti.so|7c4bac7120a8836e101622c750a226f2ad6b4905
+vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so|4609717d222dbfb66157ff9da0930e415b11bff4
+vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so|fa40de5d5623c082c0269d6060052bf996710470
+vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so|734319ccee0abd7e1e09aa10f5b6456936460ef2
+vendor/lib64/hw/gatekeeper.msm8953.so|c7b1fb00d0189513327e93c541c6e9b003bc76e9
+vendor/lib64/hw/keystore.msm8953.so|c396bd1b3375957af39929ee27155561599ed5cf
+vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc|1b8d5f58fe0a57906acf72b862c16a2521daa97b
+vendor/etc/init/android.hardware.keymaster@3.0-service-qti.rc|573b7392c8997008204081165cfe81a11080745d
+vendor/lib/libQSEEComAPI.so|9296e10faf426b6dd6c4f488c21852c4dafdc315
+vendor/lib64/libQSEEComAPI.so|d6a57ecb522134baf732ea3529fbd9cfe5ace91c
