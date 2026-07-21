@@ -260,9 +260,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
-# KeyMint HAL
+# Keymaster HAL
 PRODUCT_PACKAGES += \
-    android.hardware.security.keymint-service
+    android.hardware.keymaster@4.1-service \
 
 # Lights
 PRODUCT_PACKAGES += \
