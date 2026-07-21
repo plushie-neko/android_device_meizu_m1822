@@ -200,6 +200,11 @@ PRODUCT_PACKAGES += \
     libvndfwk_detect_jni.qti.vendor
 
 
+# Gatekeeper and Keymaster HIDL interfaces
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0 \
+    android.hardware.keymaster@3.0
+
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@2.1.vendor \
