@@ -46,6 +46,8 @@ TARGET_VENDOR_PROP := $(DEVICE_PATH)/vendor.prop
 
 # Kernel
 TARGET_KERNEL_CONFIG := m1822_defconfig
+TARGET_KERNEL_CLANG_VERSION := latest
+TARGET_KERNEL_LLVM_BINUTILS := true
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_serial_dm,0x78af000 loop.max_part=16 androidboot.usbconfigfs=true
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
