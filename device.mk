@@ -202,8 +202,8 @@ PRODUCT_PACKAGES += \
 
 # Gatekeeper and Keymaster HIDL interfaces
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0 \
-    android.hardware.keymaster@3.0
+    android.hardware.gatekeeper@1.0.vendor \
+    android.hardware.keymaster@3.0.vendor
 
 # GPS
 PRODUCT_PACKAGES += \
