@@ -337,3 +337,6 @@ service vendor.sensors-hal-1-0 /vendor/bin/hw/android.hardware.sensors@1.0-servi
     group system wakelock uhid input context_hub
     capabilities BLOCK_SUSPEND
     rlimit rtprio 10 10
+# Link vendor.sys.listeners.registered to sys.listeners.registered for prebuilt HALs
+on property:vendor.sys.listeners.registered=true
+    setprop sys.listeners.registered true
