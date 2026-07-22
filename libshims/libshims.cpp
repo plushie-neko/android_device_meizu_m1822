@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <sys/types.h>
 
 namespace android {
     // libandroid.so
@@ -25,4 +26,13 @@ namespace android {
     extern "C" uint8_t get_num_of_cameras_to_expose() {
         return 2;
     }
+
+    // fingerprint HAL
+    class String16;
+    class PermissionCache {
+    public:
+        static bool checkPermission(const String16&, pid_t, uid_t) {
+            return true;
+        }
+    };
 }
