@@ -84,6 +84,17 @@ sed -i "s|persist.camera.debug.logfile|persist.vendor.camera.dbglog|g" "${DEVICE
 "${PATCHELF}" --add-needed "libui_shim.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libmmcamera_ppeiscore.so
 
 # Camera VNDK support
+"${PATCHELF}" --add-needed "libcamshim.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/hw/camera.msm8953.so
+"${PATCHELF}" --remove-needed "libandroid.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libmeizucamera.so
+"${PATCHELF}" --remove-needed "libandroid_runtime.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libmeizucamera.so
+"${PATCHELF}" --remove-needed "libnativehelper.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libmeizucamera.so
+"${PATCHELF}" --remove-needed "libandroid.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libcam.common.meizu.so
+"${PATCHELF}" --remove-needed "libcamera_client.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libcam.common.meizu.so
+"${PATCHELF}" --remove-needed "libjnigraphics.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libcam.common.meizu.so
+"${PATCHELF}" --remove-needed "libandroid_runtime.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libcam.common.meizu.so
+"${PATCHELF}" --remove-needed "libgui.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libvfb_render.so
+"${PATCHELF}" --remove-needed "libgui.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libvmp_render.so
+"${PATCHELF}" --remove-needed "libjnigraphics.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libphoto_timestamp.so
 "${PATCHELF}" --remove-needed "libandroid.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libmmcamera2_stats_modules.so
 "${PATCHELF}" --remove-needed "libgui.so" "${DEVICE_BLOB_ROOT}"/vendor/lib/libmmcamera2_stats_modules.so
 sed -i "s|libandroid.so|libcamshim.so|g" "${DEVICE_BLOB_ROOT}"/vendor/lib/libmmcamera2_stats_modules.so

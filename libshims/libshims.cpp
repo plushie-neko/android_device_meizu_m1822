@@ -20,4 +20,9 @@ namespace android {
     extern "C" void ASensorManager_getInstanceForPackage() {}
     // libandroid_runtime.so
     extern "C" void _ZNK7android6Sensor11getMaxValueEv() {}
+
+    // camera HAL
+    extern "C" uint8_t get_num_of_cameras_to_expose() {
+        return 2;
+    }
 }

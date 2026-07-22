@@ -105,6 +105,27 @@ vendor/lib/libactuator_pseudo.so
 vendor/lib/libactuator_rohm_bu64243gwz.so
 
 # Camera base - from Flyme 8.0.5.0A (Flyme_8.0.1592979314)
+lib/hw/camera.msm8953.so:vendor/lib/hw/camera.msm8953.so
+vendor/lib/libmeizucamera.so
+vendor/lib/libcam.common.meizu.so
+vendor/lib/libcam.common.meizu.platform.so
+vendor/lib/libmpbase.so
+vendor/lib/libarcsoft_makeup.so
+vendor/lib/libmakeup_style.so
+vendor/lib/libfilter_effects.so
+vendor/lib/libphoto_timestamp.so
+vendor/lib/libarcsoft_dualcam_refocus.so
+vendor/lib/libarcsoft_high_dynamic_range.so
+vendor/lib/libarcsoft_low_light_shot.so
+vendor/lib/libts_detected_face_hal.so
+vendor/lib/libts_face_beautify_hal.so
+vendor/lib/libvfb_render.so
+vendor/lib/libvmp_render.so
+vendor/lib/libhal_dbg.so
+vendor/lib/vendor.qti.hardware.camera.device@1.0_vendor.so
+vendor/lib/vendor.qti.hardware.meizu.camera.device@1.0_vendor.so
+vendor/lib64/vendor.qti.hardware.camera.device@1.0_vendor.so
+vendor/lib64/vendor.qti.hardware.meizu.camera.device@1.0_vendor.so
 bin/mm-qcamera-daemon:vendor/bin/mm-qcamera-daemon
 bin/remosaic_daemon:vendor/bin/remosaic_daemon
 vendor/lib/libChamomilePA.so
