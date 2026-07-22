@@ -191,7 +191,8 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.meizu_m1822
+    android.hardware.biometrics.fingerprint@2.1 \
+    android.hardware.biometrics.fingerprint@2.1.vendor
 
 # Fwk-detect
 PRODUCT_PACKAGES += \

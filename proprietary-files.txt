@@ -1910,12 +1910,17 @@ vendor/etc/init/android.hardware.drm@1.4-service.widevine.rc|225dd006bfecf6c1dca
 vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.4-service.widevine.xml|91d7c0996133556cb7f7c5d1b7e5d9e7f07b78b2
 vendor/lib64/libwvhidl.so|aa31972bf48749785f3e5d91aaafac21f226ac87
 
-# Fingerprint - from recompiled in R Mediatek BSP
-vendor/bin/goodixfingerprintd
-vendor/lib64/hw/fingerprint.msm8953.so
-vendor/lib64/libgoodixfingerprintd_binder.so
-
 # Fingerprint - from stock m1822.Flyme_8.0.1592979314
+vendor/bin/hw/android.hardware.biometrics.fingerprint@2.1-service.meizu_m1822
+vendor/etc/init/android.hardware.biometrics.fingerprint@2.1-service.meizu_m1822.rc
+vendor/lib/vendor.qti.hardware.fingerprint@1.0.so
+vendor/lib64/vendor.qti.hardware.fingerprint@1.0.so
+vendor/lib64/hw/gf_fingerprint.default.so
+vendor/lib64/hw/swfingerprint.default.so
+vendor/lib64/hw/fp_hw_acc.default.so
+vendor/lib64/libgoodixfingerprintd_binder.so
+vendor/lib64/libvendor.goodix.hardware.fingerprint@1.0.so
+vendor/lib64/libvendor.goodix.hardware.fingerprint@1.0-service.so
 lib64/libgf_hal.so:vendor/lib64/libgf_hal.so
 # Patched firmware path (system/etc/firmware -> vendor/firmware/gxf)
 lib64/libgf_algo.so:vendor/lib64/libgf_algo.so
