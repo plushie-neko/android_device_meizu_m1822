@@ -1,0 +1,4 @@
+init_daemon_domain(hal_keymaster_qti)
+
+# Allow keymaster to read sys.listeners.registered
+get_prop(hal_keymaster_qti, vendor_sys_listeners_prop)

@@ -1,0 +1,4 @@
+init_daemon_domain(hal_gatekeeper_qti)
+
+# Allow gatekeeper to read sys.listeners.registered
+get_prop(hal_gatekeeper_qti, vendor_sys_listeners_prop)

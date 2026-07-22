@@ -56,3 +56,5 @@ vendor.wlan.driver.ath          u:object_r:vendor_wifi_prop:s0
 vendor.wlan.driver.config       u:object_r:vendor_wifi_prop:s0
 vendor.wlan.                    u:object_r:vendor_wifi_prop:s0
 wifi.active.interface           u:object_r:vendor_wifi_prop:s0
+
+sys.listeners.registered u:object_r:vendor_sys_listeners_prop:s0
