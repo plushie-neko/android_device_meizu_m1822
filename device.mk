@@ -194,8 +194,7 @@ PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1 \
     android.hardware.biometrics.fingerprint@2.1.vendor \
     libbacktrace.vendor \
-    libunwind.vendor \
-    libkeystore_binder.vendor
+    libunwind.vendor
 
 # Fwk-detect
 PRODUCT_PACKAGES += \

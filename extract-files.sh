@@ -104,7 +104,9 @@ sed -i "s|libandroid.so|libcamshim.so|g" "${DEVICE_BLOB_ROOT}"/vendor/lib/libmmc
 # Gnss
 sed -i -e '$a\\    capabilities NET_BIND_SERVICE' "${DEVICE_BLOB_ROOT}"/vendor/etc/init/android.hardware.gnss@2.1-service-qti.rc
 
-# Goodix
+# Goodix / Fingerprint
+"${PATCHELF}" --remove-needed "libkeystore_binder.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/gf_fingerprint.default.so 2>/dev/null || true
+"${PATCHELF}" --remove-needed "libkeystore_binder.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/swfingerprint.default.so 2>/dev/null || true
 sed -i "s|/system/etc/firmware|/vendor/firmware/gxf|g" "${DEVICE_BLOB_ROOT}"/vendor/lib64/libgf_ca.so
 
 # IMS
