@@ -105,17 +105,13 @@ sed -i "s|libandroid.so|libcamshim.so|g" "${DEVICE_BLOB_ROOT}"/vendor/lib/libmmc
 sed -i -e '$a\\    capabilities NET_BIND_SERVICE' "${DEVICE_BLOB_ROOT}"/vendor/etc/init/android.hardware.gnss@2.1-service-qti.rc
 
 # Goodix / Fingerprint
-"${PATCHELF}" --remove-needed "libbacktrace.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/gf_fingerprint.default.so 2>/dev/null || true
-"${PATCHELF}" --remove-needed "libunwind.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/gf_fingerprint.default.so 2>/dev/null || true
-"${PATCHELF}" --remove-needed "libkeystore_binder.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/gf_fingerprint.default.so 2>/dev/null || true
-"${PATCHELF}" --remove-needed "libbacktrace.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/swfingerprint.default.so 2>/dev/null || true
-"${PATCHELF}" --remove-needed "libunwind.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/swfingerprint.default.so 2>/dev/null || true
-"${PATCHELF}" --remove-needed "libkeystore_binder.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/swfingerprint.default.so 2>/dev/null || true
-"${PATCHELF}" --remove-needed "libbacktrace.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/libgoodixfingerprintd_binder.so 2>/dev/null || true
-"${PATCHELF}" --remove-needed "libunwind.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/libgoodixfingerprintd_binder.so 2>/dev/null || true
-"${PATCHELF}" --remove-needed "libkeystore_binder.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/libgoodixfingerprintd_binder.so 2>/dev/null || true
-"${PATCHELF}" --add-needed "libcamshim.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/libgoodixfingerprintd_binder.so 2>/dev/null || true
-for FP_LIB in hw/gf_fingerprint.default.so hw/swfingerprint.default.so libgoodixfingerprintd_binder.so libvendor.goodix.hardware.fingerprint@1.0-service.so; do
+"${PATCHELF}" --remove-needed "libbacktrace.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/fingerprint.goodix.so 2>/dev/null || true
+"${PATCHELF}" --remove-needed "libunwind.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/fingerprint.goodix.so 2>/dev/null || true
+"${PATCHELF}" --remove-needed "libkeystore_binder.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/fingerprint.goodix.so 2>/dev/null || true
+"${PATCHELF}" --remove-needed "libbacktrace.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/fingerprint.sunwave.so 2>/dev/null || true
+"${PATCHELF}" --remove-needed "libunwind.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/fingerprint.sunwave.so 2>/dev/null || true
+"${PATCHELF}" --remove-needed "libkeystore_binder.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/hw/fingerprint.sunwave.so 2>/dev/null || true
+for FP_LIB in hw/fingerprint.goodix.so hw/fingerprint.sunwave.so; do
     "${PATCHELF}" --replace-needed "libprotobuf-cpp-lite.so" "libprotobuf-cpp-lite-3.9.1.so" "${DEVICE_BLOB_ROOT}"/vendor/lib64/${FP_LIB} 2>/dev/null || true
 done
 sed -i "s|/system/etc/firmware|/vendor/firmware/gxf|g" "${DEVICE_BLOB_ROOT}"/vendor/lib64/libgf_ca.so
