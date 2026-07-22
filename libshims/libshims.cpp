@@ -31,8 +31,10 @@ namespace android {
     class String16;
     class PermissionCache {
     public:
-        static bool checkPermission(const String16&, pid_t, uid_t) {
-            return true;
-        }
+        static bool checkPermission(const String16&, pid_t, uid_t);
     };
+
+    bool PermissionCache::checkPermission(const String16&, pid_t, uid_t) {
+        return true;
+    }
 }
