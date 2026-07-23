@@ -30,6 +30,10 @@ namespace android {
         return nullptr;
     }
 
+    extern "C" int jniThrowRuntimeException(void* env, const char* msg) {
+        return 0;
+    }
+
     // camera HAL
     extern "C" uint8_t get_num_of_cameras_to_expose() {
         return 2;

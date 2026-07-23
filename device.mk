@@ -37,7 +37,6 @@ TARGET_SCREEN_WIDTH := 1080
 
 # Device VINTF Manifest
 DEVICE_MANIFEST_FILE += $(LOCAL_PATH)/configs/manifest.xml
-DEVICE_MANIFEST_FILE += $(LOCAL_PATH)/configs/android.hardware.biometrics.fingerprint@2.1-service.xml
 
 # Dalvik VM configs
 $(call inherit-product, $(LOCAL_PATH)/configs/memconfig/phone-xxhdpi-3072-dalvik-heap.mk)
@@ -197,7 +196,8 @@ PRODUCT_PACKAGES += \
     meizu_fingerprint_detect \
     init.meizu_fingerprint.rc \
     android.hardware.biometrics.fingerprint@2.1 \
-    android.hardware.biometrics.fingerprint@2.1.vendor \
+    android.hardware.biometrics.fingerprint@2.1-service.meizu_m1822 \
+    android.hardware.biometrics.fingerprint@2.1-service.meizu_m1822.xml \
     android.hidl.base@1.0.vendor \
     android.frameworks.displayservice@1.0.vendor \
     libbacktrace.vendor \

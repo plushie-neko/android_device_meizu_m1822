@@ -1,0 +1,6 @@
+prebuilt_etc_xml {
+    name: "android.hardware.biometrics.fingerprint@2.1-service.meizu_m1822.xml",
+    src: "android.hardware.biometrics.fingerprint@2.1-service.xml",
+    vendor: true,
+    sub_dir: "vintf/manifest",
+}
