@@ -194,6 +194,7 @@ PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1.vendor \
     android.hardware.biometrics.fingerprint@2.1-service \
     fingerprint.meizu_m1822 \
+    android.frameworks.displayservice@1.0.vendor \
     libbacktrace.vendor \
     libunwind.vendor
 

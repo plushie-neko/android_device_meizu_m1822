@@ -8,6 +8,7 @@
 #include <log/log.h>
 #include <string.h>
 #include <unistd.h>
+#include <errno.h>
 
 #define SUNWAVE_CHIP_INFO "/sys/devices/virtual/misc/sunwave_fp/chip_info"
 #define GOODIX_LIB "fingerprint.goodix.so"
@@ -37,6 +38,8 @@ static bool is_sunwave() {
 
 static int fingerprint_open(const struct hw_module_t* module, const char* id,
                             struct hw_device_t** device) {
+    (void)module;
+
     if (device == nullptr) {
         ALOGE("NULL device on open");
         return -EINVAL;
