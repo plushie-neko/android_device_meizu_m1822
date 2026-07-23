@@ -1,0 +1,11 @@
+cc_library_shared {
+    name: "fingerprint.meizu_m1822",
+    relative_install_path: "hw",
+    srcs: ["fingerprint.cpp"],
+    shared_libs: [
+        "liblog",
+        "libdl",
+        "libhardware",
+    ],
+    vendor: true,
+}

@@ -193,13 +193,9 @@ PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1 \
     android.hardware.biometrics.fingerprint@2.1.vendor \
     android.hardware.biometrics.fingerprint@2.1-service \
+    fingerprint.meizu_m1822 \
     libbacktrace.vendor \
     libunwind.vendor
-
-# Fingerprint scripts
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/bin/init.fingerprint.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.fingerprint.sh \
-    $(LOCAL_PATH)/rootdir/etc/init.fingerprint.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.fingerprint.rc
 
 # Fwk-detect
 PRODUCT_PACKAGES += \

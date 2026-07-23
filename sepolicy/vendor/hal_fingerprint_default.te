@@ -9,6 +9,10 @@ binder_call(hal_fingerprint_default, keystore)
 # Allow HwBinder communication
 hwbinder_use(hal_fingerprint_default)
 
+# Access fingerprint device nodes directly
+allow hal_fingerprint_default goodixfingerprintd_device:chr_file rw_file_perms;
+allow hal_fingerprint_default sysfs:file r_file_perms;
+
 # Add services
 allow hal_fingerprint_default goodixfingerprintd_service:service_manager find;
 allow hal_fingerprint_default fingerprint_service:service_manager find;
