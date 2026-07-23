@@ -144,5 +144,4 @@ wifi.interface=wlan0
 # Wifi-Display
 persist.sys.wfd.virtual=0
 
-# Fingerprint
-ro.hardware.fingerprint=meizu_m1822
+

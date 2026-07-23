@@ -15,7 +15,7 @@ int main() {
         close(fd);
         if (n > 0) {
             buf[n] = '\0';
-            if (!strstr(buf, "id : 0x0") && !strstr(buf, "id: 0x0")) {
+            if (!strstr(buf, "id     : 0x0") && !strstr(buf, "id: 0x0") && !strstr(buf, "0x0 lib:")) {
                 is_sunwave = true;
             }
         }
@@ -23,9 +23,11 @@ int main() {
     
     if (is_sunwave) {
         android::base::SetProperty("ro.hardware.fingerprint", "sunwave");
+        android::base::SetProperty("persist.sys.fp.vendor", "sunwave");
         ALOGI("Detected Sunwave fingerprint sensor");
     } else {
         android::base::SetProperty("ro.hardware.fingerprint", "goodix");
+        android::base::SetProperty("persist.sys.fp.vendor", "goodix");
         ALOGI("Detected Goodix fingerprint sensor");
     }
     return 0;

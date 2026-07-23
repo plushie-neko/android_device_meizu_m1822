@@ -35,6 +35,10 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 TARGET_SCREEN_HEIGHT := 2160
 TARGET_SCREEN_WIDTH := 1080
 
+# Device VINTF Manifest
+DEVICE_MANIFEST_FILE += $(LOCAL_PATH)/configs/manifest.xml
+DEVICE_MANIFEST_FILE += $(LOCAL_PATH)/configs/android.hardware.biometrics.fingerprint@2.1-service.xml
+
 # Dalvik VM configs
 $(call inherit-product, $(LOCAL_PATH)/configs/memconfig/phone-xxhdpi-3072-dalvik-heap.mk)
 
