@@ -190,10 +190,11 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
+    meizu_fingerprint_detect \
+    init.meizu_fingerprint.rc \
     android.hardware.biometrics.fingerprint@2.1 \
     android.hardware.biometrics.fingerprint@2.1.vendor \
-    android.hardware.biometrics.fingerprint@2.1-service \
-    fingerprint.meizu_m1822 \
+    android.hidl.base@1.0.vendor \
     android.frameworks.displayservice@1.0.vendor \
     libbacktrace.vendor \
     libunwind.vendor

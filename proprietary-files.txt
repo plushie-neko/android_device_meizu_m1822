@@ -1936,6 +1936,8 @@ vendor/etc/vintf/manifest/manifest_android.hardware.drm@1.4-service.widevine.xml
 vendor/lib64/libwvhidl.so|aa31972bf48749785f3e5d91aaafac21f226ac87
 
 # Fingerprint - from stock m1822.Flyme_8.0.1592979314
+vendor/bin/hw/android.hardware.biometrics.fingerprint@2.1-service|vendor/bin/hw/android.hardware.biometrics.fingerprint@2.1-service.meizu_m1822
+vendor/etc/init/android.hardware.biometrics.fingerprint@2.1-service.rc|vendor/etc/init/android.hardware.biometrics.fingerprint@2.1-service.meizu_m1822.rc
 vendor/lib/vendor.qti.hardware.fingerprint@1.0.so
 vendor/lib64/vendor.qti.hardware.fingerprint@1.0.so
 -vendor/lib64/hw/gf_fingerprint.default.so|fingerprint.goodix.so

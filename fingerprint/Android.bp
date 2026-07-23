@@ -1,11 +1,16 @@
-cc_library_shared {
-    name: "fingerprint.meizu_m1822",
-    relative_install_path: "hw",
+cc_binary {
+    name: "meizu_fingerprint_detect",
     srcs: ["fingerprint.cpp"],
     shared_libs: [
+        "libbase",
         "liblog",
-        "libdl",
-        "libhardware",
     ],
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "init.meizu_fingerprint.rc",
+    src: "init.meizu_fingerprint.rc",
+    sub_dir: "init",
     vendor: true,
 }

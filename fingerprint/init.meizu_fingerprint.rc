@@ -1,0 +1,10 @@
+service meizu_fingerprint_detect /vendor/bin/meizu_fingerprint_detect
+    class core
+    user root
+    group root
+    oneshot
+
+on early-boot
+    start meizu_fingerprint_detect
+
+

@@ -15,7 +15,7 @@
 /persist/data/gf*                               u:object_r:goodixfingerprintd_data_file:s0
 /data/system/fingerprint(/.*)?                  u:object_r:goodixfingerprintd_data_file:s0
 /(vendor|system/vendor)/bin/goodixfingerprintd  u:object_r:goodixfingerprintd_exec:s0
-/(vendor|system/vendor)/bin/init\.goodix\.sh	u:object_r:init_fingerprint_exec:s0
+/(vendor|system/vendor)/bin/meizu_fingerprint_detect	u:object_r:init_fingerprint_exec:s0
 
 # HALs
 /(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.meizu_m1822    u:object_r:hal_fingerprint_default_exec:s0
