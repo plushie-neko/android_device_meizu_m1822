@@ -88,8 +88,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
 
 # ANT
-PRODUCT_PACKAGES += \
-    AntHalService
+# Removed AntHalService
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -290,7 +289,6 @@ PRODUCT_PACKAGES += \
 
 # OMX
 PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
     libmm-omxcore \
     libOmxAacEnc \
     libOmxAmrEnc \
@@ -298,8 +296,6 @@ PRODUCT_PACKAGES += \
     libOmxEvrcEnc \
     libOmxG711Enc \
     libOmxQcelp13Enc \
-    libOmxVdec \
-    libOmxVenc \
     libstagefrighthw \
     libstagefright_enc_common
 
@@ -384,12 +380,11 @@ PRODUCT_PACKAGES += \
     vendor.lineage.touch@1.0-service.meizu_m1822
 
 # Trust HAL
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
+# Removed vendor.lineage.trust@1.0-service
 
 # USB HAL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.basic
+    android.hardware.usb-service.basic
 
 # vndservicemanager
 PRODUCT_PACKAGES += \
@@ -403,12 +398,11 @@ PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
     
 # VNDK
-PRODUCT_PACKAGES += \
-    libstdc++.vendor
+# Removed libstdc++.vendor
 
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service-lazy \
+    android.hardware.wifi-service \
     android.system.net.netd@1.1.vendor \
     libcld80211 \
     libwpa_client \
