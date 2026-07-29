@@ -501,8 +501,6 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_VENDOR_MODULE := true
 LOCAL_CFLAGS += -DANDROID_PLATFORM_SDK_VERSION=$(PLATFORM_SDK_VERSION)
 
-include $(BUILD_SHARED_LIBRARY)
-
 LOCAL_CFLAGS += -Wno-unused-variable
 LOCAL_CFLAGS += -Wno-sign-compare
 LOCAL_CFLAGS += -Wno-unused-parameter
@@ -515,5 +513,7 @@ LOCAL_CFLAGS += -Wno-unused-function
 LOCAL_CFLAGS += -Wno-unused-local-typedef
 LOCAL_CFLAGS += -Wno-error=deprecated-non-prototype
 LOCAL_CFLAGS += -Wno-unused-but-set-variable
+
+include $(BUILD_SHARED_LIBRARY)
 
 endif
