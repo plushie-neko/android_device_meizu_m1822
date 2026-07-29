@@ -383,8 +383,7 @@ PRODUCT_PACKAGES += \
 # Removed vendor.lineage.trust@1.0-service
 
 # USB HAL
-PRODUCT_PACKAGES += \
-    android.hardware.usb-service.basic
+# Removed android.hardware.usb-service.basic
 
 # vndservicemanager
 PRODUCT_PACKAGES += \
