@@ -13,11 +13,23 @@ service vendor.gx_fpd /vendor/bin/goodixfingerprintd
     group system
     task_profiles ServiceCapacityLow
 
+on post-fs-data
+    mkdir /data/vendor/fingerprint 0770 system system
+    mkdir /data/vendor/goodix 0770 system system
+
 on boot
     # Fingerprint Permissions
     chown system system /dev/goodix_fp
     chmod 0644 /dev/goodix_fp
 
+    write /sys/kernel/debug/clk/gcc_blsp1_qup1_spi_apps_clk/enable 1
+    write /sys/kernel/debug/clk/gcc_blsp1_qup2_spi_apps_clk/enable 1
+    write /sys/kernel/debug/clk/gcc_blsp1_qup3_spi_apps_clk/enable 1
+    write /sys/kernel/debug/clk/gcc_blsp1_qup4_spi_apps_clk/enable 1
+    write /sys/kernel/debug/clk/gcc_blsp2_qup1_spi_apps_clk/enable 1
+    write /sys/kernel/debug/clk/gcc_blsp2_qup2_spi_apps_clk/enable 1
+    write /sys/kernel/debug/clk/gcc_blsp2_qup3_spi_apps_clk/enable 1
+    write /sys/kernel/debug/clk/gcc_blsp2_qup4_spi_apps_clk/enable 1
     start vendor.gx_fpd
 
 on property:sys.boot_completed=1
