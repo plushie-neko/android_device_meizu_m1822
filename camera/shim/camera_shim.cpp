@@ -6,7 +6,7 @@
 #include <dlfcn.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <errno.h>
 static const char* VENDOR_LIBRARY_PATH = "/vendor/lib/hw/camera.msm8953_vendor.so";
 static camera_module_t *gVendorModule = nullptr;
 static void *gVendorHandle = nullptr;
