@@ -154,3 +154,5 @@ zygote.critical_window.minute=10
 
 # Navbar
 qemu.hw.mainkeys=0
+vendor.camera.aux.packagelist=org.lineageos.aperture,com.android.camera
+vendor.camera.expose.aux=1
