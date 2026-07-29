@@ -19,4 +19,6 @@ LOCAL_SHARED_LIBRARIES := \
 
 LOCAL_CFLAGS := -Wall -Wextra -Werror -Wno-unused-parameter
 
+LOCAL_C_INCLUDES += system/media/camera/include
+
 include $(BUILD_SHARED_LIBRARY)
