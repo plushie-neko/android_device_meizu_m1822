@@ -362,4 +362,10 @@
 
     <!-- Whether to cancel fingerprint operation if not idle -->
     <bool name="config_fpCancelIfNotIdle">true</bool>
+
+    <!-- A list of package names that are allowed to access the auxiliary cameras. -->
+    <string-array name="config_cameraAuxPackageAllowList">
+        <item>org.lineageos.aperture</item>
+        <item>com.android.camera</item>
+    </string-array>
 </resources>
