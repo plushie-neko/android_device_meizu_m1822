@@ -221,3 +221,4 @@ WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit from the proprietary version
 -include vendor/meizu/m1822/BoardConfigVendor.mk
+AB_OTA_UPDATER := false
